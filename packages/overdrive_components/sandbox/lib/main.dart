@@ -9,6 +9,7 @@ void main() {
   addGarageStories(dashbook);
   addPlayerStories(dashbook);
   addTireFixerWorkbench(dashbook);
+  addPneumaticScrewdiver(dashbook);
   addToolTableStories(dashbook);
 
   runApp(dashbook);
