@@ -3,18 +3,18 @@ import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'behaviors/keyboard_movement_behavior.dart';
+import 'behaviors/behaviors.dart';
 
 class Player extends Entity with HasGameRef {
   Player._({
-    required Behavior movementBehavior,
+    required Iterable<Behavior> movementBehavior,
   }) : super(
           size: _playerSize,
           children: [
             RectangleComponent.relative(_playerSize, parentSize: _playerSize)
               ..paint = _paintPaint
           ],
-          behaviors: [movementBehavior],
+          behaviors: movementBehavior,
         );
 
   Player._withKeys({
@@ -23,12 +23,14 @@ class Player extends Entity with HasGameRef {
     required LogicalKeyboardKey rightKey,
     required LogicalKeyboardKey downKey,
   }) : this._(
-          movementBehavior: KeyboardMovementBehavior(
-            upKey: upKey,
-            downKey: downKey,
-            leftKey: leftKey,
-            rightKey: rightKey,
-          ),
+          movementBehavior: [
+            KeyboardMovementBehavior(
+              upKey: upKey,
+              downKey: downKey,
+              leftKey: leftKey,
+              rightKey: rightKey,
+            ),
+          ],
         );
 
   Player.awsd()
