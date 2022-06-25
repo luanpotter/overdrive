@@ -40,7 +40,7 @@ class PlayerBodyComponent extends BodyComponent with ParentIsA<Player> {
     ];
     final shape = PolygonShape()..set(vertices);
     final fixtureDef = FixtureDef(shape)
-      ..density = 0.002
+      ..density = 0.0002
       ..restitution = 0.5;
     body.createFixture(fixtureDef);
     return body;
