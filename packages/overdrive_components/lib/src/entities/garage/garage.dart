@@ -3,9 +3,24 @@ import 'package:flame/extensions.dart';
 import 'package:flame/palette.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 
+import 'garage_border_body.dart';
+
 class Garage extends Entity with HasGameRef {
   static final _paint = BasicPalette.white.paint();
   static final _carSpotPaint = BasicPalette.red.paint();
+
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+
+    final delta = Vector2.all(4);
+    await add(
+      GarageBorderBody(
+        position: delta,
+        size: gameRef.size - (delta * 2),
+      ),
+    );
+  }
 
   @override
   void render(Canvas canvas) {
@@ -14,12 +29,12 @@ class Garage extends Entity with HasGameRef {
   }
 
   void renderBackground(Canvas canvas) {
-    canvas.drawRect(gameRef.size.toRect().deflate(32.0), _paint);
+    canvas.drawRect(gameRef.size.toRect().deflate(4.0), _paint);
   }
 
   void renderCarSpots(Canvas canvas) {
     final height = gameRef.size.y / 5;
-    final width = 320.0;
+    final width = 32.0;
     final x = (gameRef.size.x - width) / 2;
     canvas.drawRect(Rect.fromLTWH(x, height, width, height), _carSpotPaint);
     canvas.drawRect(Rect.fromLTWH(x, 3 * height, width, height), _carSpotPaint);
