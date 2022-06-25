@@ -5,7 +5,7 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'player.dart';
 
 class PlayerBodyComponent extends BodyComponent with ParentIsA<Player> {
-  static final double size = 30.0;
+  static final double size = 4.0;
   static final _paint = BasicPalette.blue.paint();
 
   final Vector2 startPosition;
