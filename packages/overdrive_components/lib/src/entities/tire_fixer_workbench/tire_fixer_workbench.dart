@@ -12,6 +12,7 @@ class TireFixerWorkbench extends Entity {
             TireFixerWorkbenchBodyComponent(startPosition: position),
           ],
         );
-  
-  TireFixerWorkbenchBodyComponent get body => firstChild<TireFixerWorkbenchBodyComponent>()!;
+
+  TireFixerWorkbenchBodyComponent get body =>
+      firstChild<TireFixerWorkbenchBodyComponent>()!;
 }
