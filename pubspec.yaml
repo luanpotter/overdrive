@@ -11,6 +11,8 @@ dependencies:
   flame_audio: 1.2.0
   flame_forge2d: 0.12.0
   flame_behaviors: 0.1.1
+  overdrive_components:
+    path: packages/overdrive_components
   flutter:
     sdk: flutter
 
