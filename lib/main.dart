@@ -13,5 +13,6 @@ class OverdriveGame extends FlameGame {
 
     camera.viewport = FixedResolutionViewport(Vector2(1280, 720));
     add(Garage());
+    add(ToolTable(position: size / 2));
   }
 }
