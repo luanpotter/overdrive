@@ -1,9 +1,10 @@
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 
-class StoryGame extends FlameGame {
+class StoryGame extends FlameGame with HasKeyboardHandlerComponents {
   StoryGame(
     this.component, {
     this.center = true,
