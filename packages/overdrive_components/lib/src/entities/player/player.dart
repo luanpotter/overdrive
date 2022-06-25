@@ -1,23 +1,27 @@
 import 'package:flame/components.dart';
+import 'package:flame/game.dart';
+import 'package:flame/palette.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'behaviors/behaviors.dart';
+import 'player_body_component.dart';
 
 class Player extends Entity with HasGameRef {
+  static final playerSize = Vector2.all(PlayerBodyComponent.size);
+
   Player._({
+    required Vector2 position,
     required Iterable<Behavior> behaviors,
   }) : super(
-          size: _playerSize,
           children: [
-            RectangleComponent.relative(_playerSize, parentSize: _playerSize)
-              ..paint = _paintPaint
+            PlayerBodyComponent(position),
           ],
           behaviors: behaviors,
         );
 
   Player._withKeys({
+    required Vector2 position,
     required LogicalKeyboardKey leftKey,
     required LogicalKeyboardKey upKey,
     required LogicalKeyboardKey rightKey,
@@ -26,6 +30,7 @@ class Player extends Entity with HasGameRef {
     required LogicalKeyboardKey runKey,
     required LogicalKeyboardKey useKey,
   }) : this._(
+          position: position,
           behaviors: [
             KeyboardMovementBehavior(
               upKey: upKey,
@@ -39,8 +44,10 @@ class Player extends Entity with HasGameRef {
           ],
         );
 
-  Player.awsd()
-      : this._withKeys(
+  Player.wasd({
+    required Vector2 position,
+  }) : this._withKeys(
+          position: position,
           leftKey: LogicalKeyboardKey.keyA,
           upKey: LogicalKeyboardKey.keyW,
           rightKey: LogicalKeyboardKey.keyD,
@@ -50,8 +57,10 @@ class Player extends Entity with HasGameRef {
           pickKey: LogicalKeyboardKey.keyG,
         );
 
-  Player.arrows()
-      : this._withKeys(
+  Player.arrows({
+    required Vector2 position,
+  }) : this._withKeys(
+          position: position,
           leftKey: LogicalKeyboardKey.arrowLeft,
           upKey: LogicalKeyboardKey.arrowUp,
           rightKey: LogicalKeyboardKey.arrowRight,
@@ -61,6 +70,5 @@ class Player extends Entity with HasGameRef {
           pickKey: LogicalKeyboardKey.keyL,
         );
 
-  static final _playerSize = Vector2(10, 10);
-  static final _paintPaint = Paint()..color = Colors.red;
+  PlayerBodyComponent get body => firstChild<PlayerBodyComponent>()!;
 }

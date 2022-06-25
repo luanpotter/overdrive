@@ -13,7 +13,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
     required this.runKey,
     required this.useKey,
     required this.pickKey,
-    this.speed = 100,
+    this.baseImpulse = 750,
   });
 
   /// The left key.
@@ -38,43 +38,41 @@ class KeyboardMovementBehavior extends Behavior<Player>
   final LogicalKeyboardKey useKey;
 
   /// The speed at which the player moves.
-  double speed;
+  double baseImpulse;
 
-  int _movementX = 0;
-
-  int _movementY = 0;
+  Vector2 _movement = Vector2.zero();
 
   int _runFactor = 1;
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     if (keysPressed.containsAll([upKey, leftKey])) {
-      _movementY = -1;
-      _movementX = -1;
+      _movement.y = -1;
+      _movement.x = -1;
     } else if (keysPressed.containsAll([upKey, rightKey])) {
-      _movementY = -1;
-      _movementX = 1;
+      _movement.y = -1;
+      _movement.x = 1;
     } else if (keysPressed.containsAll([downKey, leftKey])) {
-      _movementY = 1;
-      _movementX = -1;
+      _movement.y = 1;
+      _movement.x = -1;
     } else if (keysPressed.containsAll([downKey, rightKey])) {
-      _movementY = 1;
-      _movementX = 1;
+      _movement.y = 1;
+      _movement.x = 1;
     } else if (keysPressed.contains(leftKey)) {
-      _movementX = -1;
-      _movementY = 0;
+      _movement.x = -1;
+      _movement.y = 0;
     } else if (keysPressed.contains(upKey)) {
-      _movementY = -1;
-      _movementX = 0;
+      _movement.y = -1;
+      _movement.x = 0;
     } else if (keysPressed.contains(rightKey)) {
-      _movementX = 1;
-      _movementY = 0;
+      _movement.x = 1;
+      _movement.y = 0;
     } else if (keysPressed.contains(downKey)) {
-      _movementY = 1;
-      _movementX = 0;
+      _movement.y = 1;
+      _movement.x = 0;
     } else {
-      _movementX = 0;
-      _movementY = 0;
+      _movement.x = 0;
+      _movement.y = 0;
     }
 
     if (keysPressed.contains(runKey)) {
@@ -95,8 +93,8 @@ class KeyboardMovementBehavior extends Behavior<Player>
 
   @override
   void update(double dt) {
-    parent.position.y += _movementY * speed * _runFactor * dt;
-    parent.position.x += _movementX * speed * _runFactor * dt;
+    final acc = _movement * (baseImpulse * _runFactor * dt);
+    parent.body.body.applyLinearImpulse(acc);
 
     super.update(dt);
   }
