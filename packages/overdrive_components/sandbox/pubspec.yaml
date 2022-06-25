@@ -1,0 +1,18 @@
+name: sandbox
+description: Sandbox environment for components
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flame: 1.2.0
+  dashbook: 0.1.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flame_lint: 0.1.0
