@@ -13,7 +13,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
     required this.runKey,
     required this.useKey,
     required this.pickKey,
-    this.baseImpulse = 750,
+    this.baseImpulse = 30,
   });
 
   /// The left key.
@@ -76,7 +76,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
     }
 
     if (keysPressed.contains(runKey)) {
-      _runFactor = 2;
+      _runFactor = 40;
     } else {
       _runFactor = 1;
     }
