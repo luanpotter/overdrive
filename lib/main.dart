@@ -12,6 +12,6 @@ class OverdriveGame extends FlameGame {
     await super.onLoad();
 
     camera.viewport = FixedResolutionViewport(Vector2(1280, 720));
-    add(GarageEntity());
+    add(Garage());
   }
 }
