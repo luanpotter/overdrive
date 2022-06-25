@@ -21,6 +21,7 @@ class StoryGame extends FlameGame {
 
   @override
   Future<void> onLoad() async {
+    camera.viewport = FixedResolutionViewport(Vector2(1280, 720));
     if (center) {
       camera.followVector2(Vector2.zero());
     }
