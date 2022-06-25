@@ -11,8 +11,13 @@ dependencies:
     sdk: flutter
   flame: 1.2.0
   dashbook: 0.1.8
+  overdrive_components:
+    path: ../
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flame_lint: 0.1.0
+
+flutter:
+  uses-material-design: false
