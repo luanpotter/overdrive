@@ -15,5 +15,6 @@ class OverdriveGame extends FlameGame with HasKeyboardHandlerComponents {
     camera.viewport = FixedResolutionViewport(Vector2(1280, 720));
     add(Garage());
     add(Player.awsd());
+    add(ToolTable(position: size / 2));
   }
 }
