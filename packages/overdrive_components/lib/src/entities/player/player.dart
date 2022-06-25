@@ -23,7 +23,7 @@ class Player extends Entity with HasGameRef {
     required LogicalKeyboardKey rightKey,
     required LogicalKeyboardKey downKey,
   }) : this._(
-          movementBehavior: [
+          behaviors: [
             KeyboardMovementBehavior(
               upKey: upKey,
               downKey: downKey,
