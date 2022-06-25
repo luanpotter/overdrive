@@ -1,0 +1,21 @@
+name: big_game_jam
+description: Working title
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=2.18.0-165.1.beta <3.0.0'
+
+dependencies:
+  flame: 1.2.0
+  flame_audio: 1.2.0
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flame_lint: 0.1.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: false
