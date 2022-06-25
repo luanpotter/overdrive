@@ -1,6 +1,4 @@
 import 'package:flame/components.dart';
-import 'package:flame/game.dart';
-import 'package:flame/palette.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/services.dart';
 
@@ -8,7 +6,7 @@ import 'behaviors/behaviors.dart';
 import 'player_body_component.dart';
 
 class Player extends Entity with HasGameRef {
-  static final playerSize = Vector2.all(PlayerBodyComponent.size);
+  static final playerSize = PlayerBodyComponent.size;
 
   Player._({
     required Vector2 position,

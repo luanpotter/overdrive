@@ -13,7 +13,6 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
       : super(
           gravity: Vector2.zero(),
           camera: createCamera(),
-          zoom: 1,
         );
 
   static Camera createCamera() {
@@ -28,7 +27,7 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
 
     add(Garage());
     add(
-      Player.wasd(position: size / 2 - Vector2(100, Player.playerSize.y / 2)),
+      Player.wasd(position: size / 2 - Vector2(10, Player.playerSize.y / 2)),
     );
     add(ToolTable(position: (size - ToolTable.toolTableSize) / 2));
     add(TireFixerWorkbench(position: size / 2 + Vector2(100, -270)));
