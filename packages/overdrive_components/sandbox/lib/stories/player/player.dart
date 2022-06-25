@@ -6,5 +6,6 @@ import 'package:overdrive_components/overdrive_components.dart';
 void addPlayerStories(Dashbook dashbook) {
   dashbook
       .storiesOf('Player')
-      .add('simple', (_) => GameWidget(game: StoryGame(Player())));
+      .add('AWSD', (_) => GameWidget(game: StoryGame(Player.awsd())))
+      .add('Arrows', (_) => GameWidget(game: StoryGame(Player.arrows())));
 }
