@@ -6,6 +6,16 @@ import 'package:overdrive_components/overdrive_components.dart';
 void addPlayerStories(Dashbook dashbook) {
   dashbook
       .storiesOf('Player')
-      .add('AWSD', (_) => GameWidget(game: StoryGame(Player.awsd())))
-      .add('Arrows', (_) => GameWidget(game: StoryGame(Player.arrows())));
+      .add(
+        'WASD',
+        (_) => GameWidget(
+          game: StoryGame(Player.wasd(position: Vector2.zero())),
+        ),
+      )
+      .add(
+        'Arrows',
+        (_) => GameWidget(
+          game: StoryGame(Player.arrows(position: Vector2.zero())),
+        ),
+      );
 }
