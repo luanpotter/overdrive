@@ -22,6 +22,9 @@ class Player extends Entity with HasGameRef {
     required LogicalKeyboardKey upKey,
     required LogicalKeyboardKey rightKey,
     required LogicalKeyboardKey downKey,
+    required LogicalKeyboardKey pickKey,
+    required LogicalKeyboardKey runKey,
+    required LogicalKeyboardKey useKey,
   }) : this._(
           behaviors: [
             KeyboardMovementBehavior(
@@ -29,6 +32,9 @@ class Player extends Entity with HasGameRef {
               downKey: downKey,
               leftKey: leftKey,
               rightKey: rightKey,
+              pickKey: pickKey,
+              runKey: runKey,
+              useKey: useKey,
             ),
           ],
         );
@@ -39,6 +45,9 @@ class Player extends Entity with HasGameRef {
           upKey: LogicalKeyboardKey.keyW,
           rightKey: LogicalKeyboardKey.keyD,
           downKey: LogicalKeyboardKey.keyS,
+          runKey: LogicalKeyboardKey.keyH,
+          useKey: LogicalKeyboardKey.keyT,
+          pickKey: LogicalKeyboardKey.keyG,
         );
 
   Player.arrows()
@@ -47,6 +56,9 @@ class Player extends Entity with HasGameRef {
           upKey: LogicalKeyboardKey.arrowUp,
           rightKey: LogicalKeyboardKey.arrowRight,
           downKey: LogicalKeyboardKey.arrowDown,
+          runKey: LogicalKeyboardKey.keyK,
+          useKey: LogicalKeyboardKey.semicolon,
+          pickKey: LogicalKeyboardKey.keyL,
         );
 
   static final _playerSize = Vector2(10, 10);
