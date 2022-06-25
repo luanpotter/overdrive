@@ -8,6 +8,7 @@ void main() {
   addCarStories(dashbook);
   addGarageStories(dashbook);
   addPlayerStories(dashbook);
+  addTireFixerWorkbench(dashbook);
   addToolTableStories(dashbook);
 
   runApp(dashbook);
