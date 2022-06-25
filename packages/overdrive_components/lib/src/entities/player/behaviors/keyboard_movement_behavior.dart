@@ -10,6 +10,9 @@ class KeyboardMovementBehavior extends Behavior<Player>
     required this.downKey,
     required this.leftKey,
     required this.rightKey,
+    required this.runKey,
+    required this.useKey,
+    required this.pickKey,
     this.speed = 100,
   });
 
@@ -25,12 +28,23 @@ class KeyboardMovementBehavior extends Behavior<Player>
   /// The down key.
   final LogicalKeyboardKey downKey;
 
+  /// The run key.
+  final LogicalKeyboardKey runKey;
+
+  /// The pick key.
+  final LogicalKeyboardKey pickKey;
+
+  /// The use key.
+  final LogicalKeyboardKey useKey;
+
   /// The speed at which the player moves.
-  final double speed;
+  double speed;
 
   int _movementX = 0;
 
   int _movementY = 0;
+
+  int _runFactor = 1;
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
@@ -63,13 +77,26 @@ class KeyboardMovementBehavior extends Behavior<Player>
       _movementY = 0;
     }
 
+    if (keysPressed.contains(runKey)) {
+      _runFactor = 2;
+    } else {
+      _runFactor = 1;
+    }
+
+    if (keysPressed.contains(useKey)) {
+      // TODO(elias): use the object;
+    }
+
+    if (keysPressed.contains(pickKey)) {
+      // TODO(elias): pick something;
+    }
     return super.onKeyEvent(event, keysPressed);
   }
 
   @override
   void update(double dt) {
-    parent.position.y += _movementY * speed * dt;
-    parent.position.x += _movementX * speed * dt;
+    parent.position.y += _movementY * speed * _runFactor * dt;
+    parent.position.x += _movementX * speed * _runFactor * dt;
 
     super.update(dt);
   }
