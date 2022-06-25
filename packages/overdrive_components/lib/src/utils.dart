@@ -1,4 +1,9 @@
 // TODO: idea to extract to dartlin!
+import 'dart:ui';
+
+import 'package:flame/extensions.dart';
+import 'package:flame_forge2d/flame_forge2d.dart';
+
 extension ZipWithNext<T> on List<T> {
   List<R> zipWithNext<R>(
     R Function(T t1, T t2) mapper, {
@@ -20,5 +25,11 @@ extension ZipWithNext<T> on List<T> {
       results.add(mapper(this.last, this.first));
     }
     return results;
+  }
+}
+
+extension ToPolygonShape on Rect {
+  PolygonShape toPolygonShape() {
+    return PolygonShape()..set(toVertices());
   }
 }
