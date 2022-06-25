@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:overdrive_components/overdrive_components.dart';
 
 void main() {
   runApp(GameWidget(game: OverdriveGame()));
@@ -10,6 +11,7 @@ class OverdriveGame extends FlameGame {
   Future<void> onLoad() async {
     await super.onLoad();
 
-    // TODO: load stuff
+    camera.viewport = FixedResolutionViewport(Vector2(1280, 720));
+    add(GarageEntity());
   }
 }

@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flame: 1.2.0
+  flame_behaviors: 0.1.1
 
 dev_dependencies:
   flutter_test:
