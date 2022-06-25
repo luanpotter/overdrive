@@ -7,14 +7,14 @@ import 'behaviors/behaviors.dart';
 
 class Player extends Entity with HasGameRef {
   Player._({
-    required Iterable<Behavior> movementBehavior,
+    required Iterable<Behavior> behaviors,
   }) : super(
           size: _playerSize,
           children: [
             RectangleComponent.relative(_playerSize, parentSize: _playerSize)
               ..paint = _paintPaint
           ],
-          behaviors: movementBehavior,
+          behaviors: behaviors,
         );
 
   Player._withKeys({
