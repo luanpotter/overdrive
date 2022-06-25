@@ -31,5 +31,7 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
       Player.wasd(position: size / 2 - Vector2(100, Player.playerSize.y / 2)),
     );
     add(ToolTable(position: (size - ToolTable.toolTableSize) / 2));
+    add(TireFixerWorkbench(position: size / 2 + Vector2(100, -270)));
+    add(TireFixerWorkbench(position: size / 2 - Vector2(160, -240)));
   }
 }

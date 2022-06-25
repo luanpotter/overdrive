@@ -3,8 +3,9 @@ import 'package:flame/events.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+import 'package:flame_forge2d/flame_forge2d.dart';
 
-class StoryGame extends FlameGame with HasKeyboardHandlerComponents {
+class StoryGame extends Forge2DGame with HasKeyboardHandlerComponents {
   StoryGame(
     this.component, {
     this.center = true,
