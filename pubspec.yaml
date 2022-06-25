@@ -9,6 +9,8 @@ environment:
 dependencies:
   flame: 1.2.0
   flame_audio: 1.2.0
+  flame_forge2d: 0.12.0
+  flame_behaviors: 0.1.1
   flutter:
     sdk: flutter
 
