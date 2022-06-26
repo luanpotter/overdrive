@@ -169,13 +169,120 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                     style: TextStyle(fontSize: 30),
                   ),
                 ),
-                onPressed: () => Navigator.of(context).pushNamed(
-                  '/game',
-                  arguments: {
-                    'player1': player1,
-                    'player2': player2,
-                  },
-                ),
+                onPressed: () {
+                  showDialog<void>(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      alignment: Alignment.center,
+                      scrollable: true,
+                      content: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'How to play',
+                            style: TextStyle(
+                              fontSize: 50,
+                              fontFamily: 'Monoton',
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          const Text(
+                            'Player 1',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: 'Monoton',
+                              color: Colors.black,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          const Text(
+                            'Movements: WASD / Run: H',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                          const Text(
+                            'Use tools: T',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                          const Text(
+                            'Hold objects: G',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                          if (player2 != CharacterType.empty) ...[
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            const Text(
+                              'Player 2',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontFamily: 'Monoton',
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            const Text(
+                              'Movements: arrows / Run: K',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const Text(
+                              'Use tools: ;',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const Text(
+                              'Hold objects: L',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          Center(
+                            child: ElevatedButton(
+                              child: const Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child: Text(
+                                  'Play',
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                              ),
+                              onPressed: () => Navigator.of(context).pushNamed(
+                                '/game',
+                                arguments: {
+                                  'player1': player1,
+                                  'player2': player2,
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],
