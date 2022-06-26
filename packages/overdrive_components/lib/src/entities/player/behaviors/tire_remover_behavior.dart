@@ -69,7 +69,7 @@ class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
         gameRef.add(
           Tire(
             status: tire.status,
-            position: parent.body.body.position + Vector2(2.0, 0),
+            position: parent.body.body.position + Vector2(15.0, 15),
             physics: true,
           ),
         );

@@ -9,7 +9,7 @@ void addToolTableStories(Dashbook dashbook) {
         (_) => GameWidget(
           game: StoryGame(
             ToolTable(
-              position: Vector2.zero(),
+              startPosition: Vector2.zero(),
             ),
           ),
         ),
