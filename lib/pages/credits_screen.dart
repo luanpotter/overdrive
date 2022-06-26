@@ -11,9 +11,8 @@ class CreditsScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Header(
+            const Header(
               title: 'Credits',
-              backActionButton: () => Navigator.of(context).pushNamed('/'),
             ),
             const SizedBox(
               height: 20,

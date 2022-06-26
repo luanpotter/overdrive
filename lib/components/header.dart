@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
   final String title;
-  final VoidCallback backActionButton;
 
   const Header({
     super.key,
     required this.title,
-    required this.backActionButton,
   });
 
   @override
@@ -17,7 +15,7 @@ class Header extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: GestureDetector(
-            onTap: backActionButton,
+            onTap: () => Navigator.of(context).pop(),
             child: const Icon(
               Icons.arrow_back,
               color: Colors.white,

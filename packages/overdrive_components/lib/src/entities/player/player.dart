@@ -5,6 +5,8 @@ import 'package:overdrive_components/src/entities/items/item_type.dart';
 import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
 import 'package:overdrive_components/src/entities/player/player_body_component.dart';
 
+export 'character_type.dart';
+
 class Player extends Entity with HasGameRef {
   static final playerSize = PlayerBodyComponent.size;
   static final _heldItemOffset = Vector2(2, 2);
