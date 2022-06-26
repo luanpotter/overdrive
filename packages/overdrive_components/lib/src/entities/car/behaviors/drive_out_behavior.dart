@@ -5,7 +5,7 @@ class DriveOutBehavior extends Behavior<Car> {
   @override
   void update(double dt) {
     if (parent.position.x <= -parent.size.x) return parent.removeFromParent();
-    parent.position -= parent.velocity * dt;
+    parent.position -= parent.engineForce * dt;
     super.update(dt);
   }
 }
