@@ -5,6 +5,7 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:overdrive/pages/character_selection.dart';
 import 'package:overdrive/pages/credits_screen.dart';
 import 'package:overdrive/pages/stage_selection.dart';
 import 'package:overdrive/pages/title_screen.dart';
@@ -20,6 +21,7 @@ void main() {
       routes: {
         '/': (context) => const TitleScreen(),
         '/stages': (context) => const StageSelection(),
+        '/character_selection': (context) => CharacterSelection(),
         '/game': (context) => GameWidget(game: OverdriveGame()),
         '/credits': (context) => const CreditsScreen(),
       },
