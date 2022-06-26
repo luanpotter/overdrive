@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   flame: 1.2.0
   flame_behaviors: 0.1.1
   flame_forge2d: 0.12.0
@@ -17,3 +18,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flame_lint: 0.1.0
+  build_runner:
+  flutter_gen_runner:
+
+flutter:
+  assets:
+   - assets/images/
+
+flutter_gen:
+  line_length: 80
+  assets:
+    package_parameter_enabled: true
