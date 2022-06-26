@@ -35,7 +35,6 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
       pickCooldown = 0.25;
       parent.holdingItem = null;
     } else {
-      print(currentHoldingItem);
       final closestItem = findThings<ItemEntity>(
         whereCallback: (item) => item.realPosition != null,
         mapCallBack: _computePickupDistance,
