@@ -4,10 +4,13 @@ import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
 import 'package:flutter/services.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
-import 'package:overdrive_components/src/entities/items/item_type.dart';
 import 'package:overdrive_components/src/utils.dart';
 
 const _MAX_PICKUP_DISTANCE = 7.5;
+const _MIN_DROP_DISTANCE = 10.5;
+
+typedef double MapCallback<T>(Body player, T item);
+typedef bool WhereCallback<T>(T item);
 
 class KeyboardMovementBehavior extends Behavior<Player>
     with KeyboardHandler, HasGameRef {
@@ -95,21 +98,47 @@ class KeyboardMovementBehavior extends Behavior<Player>
       final player = parent.body.body;
       final currentHoldingItem = parent.holdingItem;
       if (currentHoldingItem != null) {
-        final entity = currentHoldingItem.spawn(
-          position: player.position + Vector2(2.0, 0),
-          physics: true,
+        final closestToolTable = findThings<ToolTable>(
+          mapCallBack: (player, item) =>
+              _computeToolTableDistance(player, item),
+          player: player,
         );
-        parent.gameRef.add(entity);
+
+        if (closestToolTable != null &&
+            closestToolTable.value <= _MIN_DROP_DISTANCE) {
+          closestToolTable.key.holdingItem = currentHoldingItem;
+        } else {
+          final entity = currentHoldingItem.spawn(
+            position: player.position + Vector2(2.0, 0),
+            physics: true,
+          );
+          parent.gameRef.add(entity);
+        }
+
         parent.holdingItem = null;
       } else {
-        final closestItem = parent.gameRef.children
-            .whereType<ItemEntity>()
-            .where((item) => item.realPosition != null)
-            .map((item) => Pair(item, _computePickupDistance(player, item)))
-            .minOrNullBy((pair) => pair.value);
+        final closestItem = findThings<ItemEntity>(
+          whereCallback: (item) => item.realPosition != null,
+          mapCallBack: (player, item) => _computePickupDistance(player, item),
+          player: player,
+        );
+
         if (closestItem != null && closestItem.value <= _MAX_PICKUP_DISTANCE) {
           parent.holdingItem = closestItem.key.itemType;
           parent.gameRef.remove(closestItem.key);
+        }
+
+        final closestToolTable = findThings<ToolTable>(
+          mapCallBack: (player, item) =>
+              _computeToolTableDistance(player, item),
+          player: player,
+        );
+
+        if (closestToolTable != null &&
+            closestToolTable.value <= _MAX_PICKUP_DISTANCE &&
+            closestToolTable.key.holdingItem != null) {
+          parent.holdingItem = closestToolTable.key.holdingItem;
+          closestToolTable.key.holdingItem = null;
         }
       }
     }
@@ -119,6 +148,21 @@ class KeyboardMovementBehavior extends Behavior<Player>
   static double _computePickupDistance(Body player, ItemEntity item) {
     return item.realPosition!.distanceTo(player.position);
   }
+
+  static double _computeToolTableDistance(Body player, ToolTable item) {
+    return item.body.body.position.distanceTo(player.position);
+  }
+
+  Pair<T, double>? findThings<T>({
+    required MapCallback mapCallBack,
+    required Body player,
+    WhereCallback<T>? whereCallback,
+  }) =>
+      parent.gameRef.children
+          .whereType<T>()
+          .where(whereCallback ?? (_) => true)
+          .map((item) => Pair(item, mapCallBack(player, item)))
+          .minOrNullBy((p0) => p0.value);
 
   @override
   void update(double dt) {

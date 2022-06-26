@@ -1,6 +1,7 @@
 export 'car/car.dart';
 export 'garage/garage.dart';
 export 'player/player.dart';
+export 'items/items.dart';
 export 'pneumatic_screwdriver/pneumatic_screwdriver.dart';
 export 'title_animation.dart';
 export 'tire/tire.dart';
