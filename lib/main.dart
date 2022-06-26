@@ -121,6 +121,12 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
       ),
     );
 
+    final toolTable = ToolTable(
+      startPosition: (size - ToolTable.toolTableSize) / 2,
+    );
+
+    await add(toolTable);
+
     if (characterPlayer2 != CharacterType.empty) {
       add(
         Player.arrows(
@@ -131,6 +137,7 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
     }
 
     add(ToolTable(position: (size - ToolTable.toolTableSize) / 2));
+
     add(
       TireFixerWorkbench(
         position: Vector2(
@@ -147,13 +154,9 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
         ),
       ),
     );
-    add(
-      PneumaticScrewdriver(
-        position: size / 2 + Vector2(-5, -27),
-        physics: true,
-      ),
-    );
 
+    // init screwdriver on toolTable;
+    toolTable.holdingItem = ItemType.screwdriver;
     spawnCar();
   }
 
