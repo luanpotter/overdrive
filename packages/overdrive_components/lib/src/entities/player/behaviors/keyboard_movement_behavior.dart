@@ -4,17 +4,18 @@ import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
 import 'package:flutter/services.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
-import 'package:overdrive_components/src/utils.dart';
+import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
+import 'package:overdrive_components/src/entities/player/behaviors/item_picker_behavior.dart';
 
-const _MAX_PICKUP_DISTANCE = 7.5;
-const _MIN_DROP_DISTANCE = 10.5;
+const MAX_PICKUP_DISTANCE = 7.5;
+const MIN_DROP_DISTANCE = 10.5;
 
 typedef double MapCallback<T>(Body player, T item);
 typedef bool WhereCallback<T>(T item);
 
 class KeyboardMovementBehavior extends Behavior<Player>
     with KeyboardHandler, HasGameRef {
-  double pickCooldown = 0.0;
+  Body get player => parent.body.body;
 
   KeyboardMovementBehavior({
     required this.upKey,
@@ -87,127 +88,31 @@ class KeyboardMovementBehavior extends Behavior<Player>
     }
 
     if (keysPressed.contains(runKey)) {
-      _runFactor = 2;
+      _runFactor = 4;
     } else {
       _runFactor = 1;
     }
 
+    final tireRemover = parent.findBehavior<TireRemoverBehavior>();
     if (keysPressed.contains(useKey)) {
       if (parent.holdingItem == ItemType.screwdriver) {
-        final closestTire = parent.gameRef.children
-            .whereType<Car>()
-            .expand((car) => car.tires)
-            .map((tire) => Pair(tire, _computeDistanceToTire(tire)))
-            .minOrNullBy((pair) => pair.value);
-        if (closestTire != null && closestTire.value <= _MIN_DROP_DISTANCE) {
-          final tire = closestTire.key;
-          final car = tire.car;
-          if (car != null) {
-            // remove tire
-            car.body.remove(tire);
-            gameRef.add(
-              Tire(
-                status: tire.status,
-                position: parent.body.body.position + Vector2(2.0, 0),
-                physics: true,
-              ),
-            );
-          }
-        }
+        tireRemover.start();
       }
+    } else {
+      tireRemover.stop();
     }
 
-    if (keysPressed.contains(pickKey) && pickCooldown == 0.0) {
-      final player = parent.body.body;
-      final currentHoldingItem = parent.holdingItem;
-      if (currentHoldingItem != null) {
-        final closestToolTable = findThings<ToolTable>(
-          mapCallBack: (player, item) =>
-              _computeToolTableDistance(player, item),
-          player: player,
-        );
-
-        if (closestToolTable != null &&
-            closestToolTable.value <= _MIN_DROP_DISTANCE) {
-          closestToolTable.key.holdingItem = currentHoldingItem;
-        } else {
-          final entity = currentHoldingItem.spawn(
-            position: player.position + Vector2(2.0, 0),
-            physics: true,
-          );
-          parent.gameRef.add(entity);
-        }
-
-        pickCooldown = 0.25;
-        parent.holdingItem = null;
-      } else {
-        final closestItem = findThings<ItemEntity>(
-          whereCallback: (item) => item.realPosition != null,
-          mapCallBack: (player, item) => _computePickupDistance(player, item),
-          player: player,
-        );
-
-        if (closestItem != null && closestItem.value <= _MAX_PICKUP_DISTANCE) {
-          parent.holdingItem = closestItem.key.itemType;
-          parent.gameRef.remove(closestItem.key);
-          pickCooldown = 0.25;
-        }
-
-        final closestToolTable = findThings<ToolTable>(
-          mapCallBack: (player, item) =>
-              _computeToolTableDistance(player, item),
-          player: player,
-        );
-
-        if (closestToolTable != null &&
-            closestToolTable.value <= _MAX_PICKUP_DISTANCE &&
-            closestToolTable.key.holdingItem != null) {
-          parent.holdingItem = closestToolTable.key.holdingItem;
-          closestToolTable.key.holdingItem = null;
-          pickCooldown = 0.25;
-        }
-      }
+    if (keysPressed.contains(pickKey)) {
+      parent.findBehavior<ItemPickerBehavior>().start();
     }
+
     return super.onKeyEvent(event, keysPressed);
   }
 
-  double _computeDistanceToTire(Tire tire) {
-    final player = parent.body.body;
-    final tirePosition =
-        tire.position + (tire.car?.body.body.position ?? Vector2.zero());
-    return player.position.distanceTo(tirePosition);
-  }
-
-  static double _computePickupDistance(Body player, ItemEntity item) {
-    return item.realPosition!.distanceTo(player.position);
-  }
-
-  static double _computeToolTableDistance(Body player, ToolTable item) {
-    return item.body.body.position.distanceTo(player.position);
-  }
-
-  Pair<T, double>? findThings<T>({
-    required MapCallback mapCallBack,
-    required Body player,
-    WhereCallback<T>? whereCallback,
-  }) =>
-      parent.gameRef.children
-          .whereType<T>()
-          .where(whereCallback ?? (_) => true)
-          .map((item) => Pair(item, mapCallBack(player, item)))
-          .minOrNullBy((p0) => p0.value);
-
   @override
   void update(double dt) {
-    if (pickCooldown > 0.0) {
-      pickCooldown -= dt;
-      if (pickCooldown < 0.0) {
-        pickCooldown = 0.0;
-      }
-    }
-
     final acc = _movement * (baseImpulse * _runFactor * dt);
-    parent.body.body.applyLinearImpulse(acc);
+    player.applyLinearImpulse(acc);
 
     super.update(dt);
   }

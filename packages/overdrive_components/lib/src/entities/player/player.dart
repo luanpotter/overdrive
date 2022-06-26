@@ -36,7 +36,8 @@ class Player extends Entity with HasGameRef {
           children: [
             PlayerBodyComponent(position),
           ],
-          behaviors: behaviors,
+          behaviors: behaviors.toList() +
+              [ItemPickerBehavior(), TireRemoverBehavior()],
         );
 
   Player._withKeys({
