@@ -10,6 +10,7 @@ void addTireFixerWorkbench(Dashbook dashbook) {
           game: StoryGame(
             TireFixerWorkbench(
               position: Vector2.zero(),
+              behaviors: [],
             ),
           ),
         ),
