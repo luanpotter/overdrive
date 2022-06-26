@@ -168,13 +168,12 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
 
   void spawnCar() {
     add(
-        Car.damaged(
-            lane: 0,
-            behaviors: [
-                DriveInBehavior(),
-                DriveOutBehavior(),
-            ],
-        ),
+      Car.damaged(
+        lane: 0,
+        behaviors: [
+          DriveInBehavior(),
+        ],
+      ),
     );
   }
 }
