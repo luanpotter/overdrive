@@ -1,7 +1,7 @@
-import 'dart:ui';
-
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
+import 'package:flame/game.dart';
+import 'package:flutter/material.dart';
 import 'package:overdrive_components/gen/assets.gen.dart';
 
 class _RunningChar extends PositionComponent with ParentIsA<TitleAnimation> {
@@ -108,5 +108,16 @@ class TitleAnimation extends PositionComponent with HasGameRef {
         _RunningChar(runningAway: false),
       ],
     );
+  }
+}
+
+class TitleAnimationPlayer extends FlameGame {
+  TitleAnimationPlayer() : super(children: [TitleAnimation()]) {
+    images.prefix = '';
+  }
+
+  @override
+  Color backgroundColor() {
+    return Colors.transparent;
   }
 }
