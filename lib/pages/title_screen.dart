@@ -50,7 +50,8 @@ class TitleScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     child: const Text('Credits'),
-                    onPressed: () {},
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed('/credits'),
                   ),
                 ],
               ),

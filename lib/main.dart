@@ -8,6 +8,8 @@ import 'package:overdrive_components/overdrive_components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
+import 'pages/credits_screen.dart';
+
 void main() {
   Flame.images.prefix = '';
 
@@ -18,6 +20,7 @@ void main() {
         '/': (context) => TitleScreen(),
         '/stages': (context) => StageSelection(),
         '/game': (context) => GameWidget(game: OverdriveGame()),
+        '/credits': (context) => CreditsScreen(),
       },
     ),
   );
