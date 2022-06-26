@@ -26,14 +26,14 @@ class TitleScreen extends StatelessWidget {
                 child: Text('Play'),
                 onPressed: () => Navigator.of(context).pushNamed('/game'),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               ElevatedButton(
                 child: Text('Settings'),
                 onPressed: () => {},
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               ElevatedButton(
