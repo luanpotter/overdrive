@@ -20,11 +20,17 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
       final closestToolTable = findThings<ToolTable>(
         mapCallBack: _computeToolTableDistance,
       );
+      final closestTireFixerWorkbench = findThings<TireFixerWorkbench>(
+        mapCallBack: _computeTireFixerWorkbenchDistance,
+      );
 
       if (closestToolTable != null &&
           closestToolTable.key.holdingItem == null &&
           closestToolTable.value <= interactDistance) {
         closestToolTable.key.holdingItem = currentHoldingItem;
+      } else if (closestTireFixerWorkbench != null &&
+          closestTireFixerWorkbench.value <= interactDistance) {
+        closestTireFixerWorkbench.key.currentFixingItem = currentHoldingItem;
       } else {
         final entity = currentHoldingItem.spawn(
           position: player.position + Vector2(2.0, 0),
@@ -67,6 +73,11 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
   }
 
   static double _computeToolTableDistance(Body player, ToolTable item) {
+    return item.body.body.position.distanceTo(player.position);
+  }
+
+  static double _computeTireFixerWorkbenchDistance(
+      Body player, TireFixerWorkbench item) {
     return item.body.body.position.distanceTo(player.position);
   }
 

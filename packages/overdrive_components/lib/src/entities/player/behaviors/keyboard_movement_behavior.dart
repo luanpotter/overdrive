@@ -4,6 +4,7 @@ import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
 import 'package:flutter/services.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
+import 'package:overdrive_components/src/utils.dart';
 
 const interactDistance = 12;
 
@@ -104,7 +105,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
     }
 
     return super.onKeyEvent(event, keysPressed);
-  }
+  }  
 
   @override
   void update(double dt) {
