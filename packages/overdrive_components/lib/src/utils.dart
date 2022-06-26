@@ -1,8 +1,46 @@
-// TODO: idea to extract to dartlin!
-import 'dart:ui';
-
 import 'package:flame/extensions.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+
+// TODO: ideas to extract to dartlin!
+
+extension IterableExtensions<T> on Iterable<T> {
+  T? minOrNullBy<R extends Comparable>(R Function(T) mapper) {
+    return _extremeOrNullBy(mapper, (it) => it < 1);
+  }
+
+  T? maxOrNullBy<R extends Comparable>(R Function(T) mapper) {
+    return _extremeOrNullBy(mapper, (it) => it > 1);
+  }
+
+  T? _extremeOrNullBy<R extends Comparable>(
+    R Function(T) mapper,
+    bool Function(int) comparison,
+  ) {
+    if (isEmpty) {
+      return null;
+    }
+    var minElement = this.first;
+    var minValue = mapper(minElement);
+    for (final el in this.skip(1)) {
+      final value = mapper(el);
+      if (comparison(value.compareTo(minValue))) {
+        minValue = value;
+        minElement = el;
+      }
+    }
+    return minElement;
+  }
+}
+
+extension ComparableIterableExtensions<T extends Comparable> on Iterable<T> {
+  T? minOrNull() {
+    return minOrNullBy((it) => it);
+  }
+
+  T? maxOrNull() {
+    return maxOrNullBy((it) => it);
+  }
+}
 
 extension ZipWithNext<T> on List<T> {
   List<R> zipWithNext<R>(
