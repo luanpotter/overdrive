@@ -14,7 +14,7 @@ class TitleScreen extends StatelessWidget {
           height: 350,
           width: 500,
         ),
-        SizedBox(
+        const SizedBox(
           height: 24,
         ),
         SizedBox(
