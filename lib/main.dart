@@ -1,6 +1,7 @@
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:overdrive_components/overdrive_components.dart';
 
 void main() {
   Flame.images.prefix = '';
+  FlameAudio.audioCache.prefix = '';
 
   runApp(
     MaterialApp(

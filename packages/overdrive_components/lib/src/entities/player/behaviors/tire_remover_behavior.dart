@@ -1,7 +1,9 @@
 import 'package:dartlin/dartlin.dart';
 import 'package:flame/components.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
+import 'package:overdrive_components/gen/assets.gen.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
 import 'package:overdrive_components/src/utils.dart';
@@ -18,6 +20,7 @@ class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
     if (isRemovingTire) {
       return;
     }
+    FlameAudio.audioCache.prefix = '';
 
     final closestTire = parent.gameRef.children
         .whereType<Car>()
@@ -28,6 +31,7 @@ class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
       final tire = closestTire.key;
       final car = tire.car;
       if (car != null) {
+        FlameAudio.play('packages/overdrive_components/${Assets.sfx.screwDriver}');
         _tire = tire;
         _cooldown = 2.0;
       }
