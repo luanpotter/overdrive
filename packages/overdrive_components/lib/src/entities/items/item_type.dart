@@ -7,17 +7,20 @@ abstract class ItemEntity extends Entity {
     super.children,
   });
 
-  Vector2 get realPosition;
+  Vector2? get realPosition;
   ItemType get itemType;
 }
 
 enum ItemType { screwdriver }
 
 extension ItemTypeMethods on ItemType {
-  Entity spawn(Vector2 position) {
+  Entity spawn({
+    required Vector2 position,
+    required bool physics,
+  }) {
     switch (this) {
       case ItemType.screwdriver:
-        return PneumaticScrewdriver(position: position);
+        return PneumaticScrewdriver(position: position, physics: physics);
     }
   }
 }

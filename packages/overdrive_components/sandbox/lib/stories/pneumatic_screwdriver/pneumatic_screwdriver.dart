@@ -10,6 +10,7 @@ void addPneumaticScrewdiver(Dashbook dashbook) {
           game: StoryGame(
             PneumaticScrewdriver(
               position: Vector2.zero(),
+              physics: true,
             ),
           ),
         ),
