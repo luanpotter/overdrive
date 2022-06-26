@@ -1,11 +1,19 @@
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:overdrive/pages/title_screen.dart';
 import 'package:overdrive_components/overdrive_components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 
 void main() {
-  runApp(GameWidget(game: OverdriveGame()));
+  runApp(
+    MaterialApp(
+      routes: {
+        '/': (context) => TitleScreen(),
+        '/game': (context) => GameWidget(game: OverdriveGame()),
+      },
+    ),
+  );
 }
 
 class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
