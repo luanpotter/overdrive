@@ -4,8 +4,8 @@ import 'package:overdrive_components/src/entities/car/car.dart';
 import 'package:overdrive_components/src/entities/car/car_body_component.dart';
 import 'package:overdrive_components/src/entities/items/tire/tire_body_component.dart';
 
-import '../../entities.dart';
-import 'tire_body_component.dart';
+import 'package:overdrive_components/src/entities/entities.dart';
+import 'package:overdrive_components/src/entities/items/tire/tire_body_component.dart';
 
 enum TireStatus {
   normal(),
@@ -68,8 +68,14 @@ class Tire extends ItemEntity {
   static final tireSize = Vector2.all(2 * tireRadius);
 
   @override
-  ItemType get itemType =>
-      status == TireStatus.normal ? ItemType.normalTire : ItemType.damagedTire;
+  ItemType get itemType {
+    switch (status) {
+      case TireStatus.normal:
+        return ItemType.normalTire;
+      case TireStatus.damaged:
+        return ItemType.damagedTire;
+    }
+  }
 
   @override
   Vector2? get realPosition => body?.body.position;
