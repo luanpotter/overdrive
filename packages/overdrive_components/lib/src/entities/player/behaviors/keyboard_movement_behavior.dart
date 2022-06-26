@@ -6,7 +6,7 @@ import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
 import 'package:overdrive_components/src/utils.dart';
 
-const interactDistance = 12;
+const interactDistance = 8;
 
 typedef MapCallback<T> = double Function(Body player, T item);
 typedef WhereCallback<T> = bool Function(T item);

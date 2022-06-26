@@ -118,6 +118,8 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
   Future<void> onLoad() async {
     await super.onLoad();
 
+    FlameAudio.audioCache.prefix = '';
+
     add(Garage());
     add(
       Player.wasd(
