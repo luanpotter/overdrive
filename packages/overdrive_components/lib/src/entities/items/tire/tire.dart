@@ -69,7 +69,7 @@ class Tire extends ItemEntity {
 
   @override
   ItemType get itemType =>
-      status == TireStatus.normal ? ItemType.normalTire : ItemType.demageTire;
+      status == TireStatus.normal ? ItemType.normalTire : ItemType.damagedTire;
 
   @override
   Vector2? get realPosition => body?.body.position;
