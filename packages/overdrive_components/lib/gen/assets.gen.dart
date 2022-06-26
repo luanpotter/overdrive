@@ -3,90 +3,59 @@
 ///  FlutterGen
 /// *****************************************************
 
-// coverage:ignore-file
-// ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import
-
 import 'package:flutter/widgets.dart';
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   $AssetsImagesCarGen get car => const $AssetsImagesCarGen();
-
-  /// File path: assets/images/car_frame.png
   AssetGenImage get carFrame =>
       const AssetGenImage('assets/images/car_frame.png');
-
-  /// File path: assets/images/car_spot.png
   AssetGenImage get carSpot =>
       const AssetGenImage('assets/images/car_spot.png');
-
-  /// File path: assets/images/car_wheel.png
   AssetGenImage get carWheel =>
       const AssetGenImage('assets/images/car_wheel.png');
-
-  /// File path: assets/images/floor_pattern.png
   AssetGenImage get floorPattern =>
       const AssetGenImage('assets/images/floor_pattern.png');
-
-  /// File path: assets/images/player.png
   AssetGenImage get player => const AssetGenImage('assets/images/player.png');
-
-  /// File path: assets/images/reference.png
   AssetGenImage get reference =>
       const AssetGenImage('assets/images/reference.png');
-
-  /// File path: assets/images/screw-driver-tool.png
   AssetGenImage get screwDriverTool =>
       const AssetGenImage('assets/images/screw-driver-tool.png');
-
-  /// File path: assets/images/tire-fixer-workbench.png
   AssetGenImage get tireFixerWorkbench =>
       const AssetGenImage('assets/images/tire-fixer-workbench.png');
-
-  /// File path: assets/images/tire_fixer.png
   AssetGenImage get tireFixer =>
       const AssetGenImage('assets/images/tire_fixer.png');
-
   $AssetsImagesTitleScreenGen get titleScreen =>
       const $AssetsImagesTitleScreenGen();
-
-  /// File path: assets/images/toolbox.png
   AssetGenImage get toolbox => const AssetGenImage('assets/images/toolbox.png');
+}
+
+class $AssetsSfxGen {
+  const $AssetsSfxGen();
+
+  String get carArriving => 'assets/sfx/car_arriving.mp3';
+  String get carLeaving => 'assets/sfx/car_leaving.mp3';
+  String get screwDriver => 'assets/sfx/screw_driver.mp3';
+  String get tireFixer => 'assets/sfx/tire_fixer.mp3';
 }
 
 class $AssetsImagesCarGen {
   const $AssetsImagesCarGen();
 
-  /// File path: assets/images/car/car_back.png
   AssetGenImage get carBack =>
       const AssetGenImage('assets/images/car/car_back.png');
-
-  /// File path: assets/images/car/car_front_blue.png
   AssetGenImage get carFrontBlue =>
       const AssetGenImage('assets/images/car/car_front_blue.png');
-
-  /// File path: assets/images/car/car_front_cyan.png
   AssetGenImage get carFrontCyan =>
       const AssetGenImage('assets/images/car/car_front_cyan.png');
-
-  /// File path: assets/images/car/car_front_green.png
   AssetGenImage get carFrontGreen =>
       const AssetGenImage('assets/images/car/car_front_green.png');
-
-  /// File path: assets/images/car/car_front_red.png
   AssetGenImage get carFrontRed =>
       const AssetGenImage('assets/images/car/car_front_red.png');
-
-  /// File path: assets/images/car/car_front_yellow.png
   AssetGenImage get carFrontYellow =>
       const AssetGenImage('assets/images/car/car_front_yellow.png');
-
-  /// File path: assets/images/car/tyre.png
   AssetGenImage get tyre => const AssetGenImage('assets/images/car/tyre.png');
-
-  /// File path: assets/images/car/tyre_damaged.png
   AssetGenImage get tyreDamaged =>
       const AssetGenImage('assets/images/car/tyre_damaged.png');
 }
@@ -94,15 +63,10 @@ class $AssetsImagesCarGen {
 class $AssetsImagesTitleScreenGen {
   const $AssetsImagesTitleScreenGen();
 
-  /// File path: assets/images/title_screen/scared_char.png
   AssetGenImage get scaredChar =>
       const AssetGenImage('assets/images/title_screen/scared_char.png');
-
-  /// File path: assets/images/title_screen/title.png
   AssetGenImage get title =>
       const AssetGenImage('assets/images/title_screen/title.png');
-
-  /// File path: assets/images/title_screen/wheel.png
   AssetGenImage get wheel =>
       const AssetGenImage('assets/images/title_screen/wheel.png');
 }
@@ -111,25 +75,23 @@ class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsSfxGen sfx = $AssetsSfxGen();
 }
 
-class AssetGenImage {
-  const AssetGenImage(this._assetName);
-
-  final String _assetName;
+class AssetGenImage extends AssetImage {
+  const AssetGenImage(String assetName)
+      : super(assetName, package: 'overdrive_components');
 
   Image image({
     Key? key,
-    AssetBundle? bundle,
     ImageFrameBuilder? frameBuilder,
+    ImageLoadingBuilder? loadingBuilder,
     ImageErrorWidgetBuilder? errorBuilder,
     String? semanticLabel,
     bool excludeFromSemantics = false,
-    double? scale,
     double? width,
     double? height,
     Color? color,
-    Animation<double>? opacity,
     BlendMode? colorBlendMode,
     BoxFit? fit,
     AlignmentGeometry alignment = Alignment.center,
@@ -138,24 +100,19 @@ class AssetGenImage {
     bool matchTextDirection = false,
     bool gaplessPlayback = false,
     bool isAntiAlias = false,
-    String? package = 'overdrive_components',
     FilterQuality filterQuality = FilterQuality.low,
-    int? cacheWidth,
-    int? cacheHeight,
   }) {
-    return Image.asset(
-      _assetName,
+    return Image(
       key: key,
-      bundle: bundle,
+      image: this,
       frameBuilder: frameBuilder,
+      loadingBuilder: loadingBuilder,
       errorBuilder: errorBuilder,
       semanticLabel: semanticLabel,
       excludeFromSemantics: excludeFromSemantics,
-      scale: scale,
       width: width,
       height: height,
       color: color,
-      opacity: opacity,
       colorBlendMode: colorBlendMode,
       fit: fit,
       alignment: alignment,
@@ -164,14 +121,9 @@ class AssetGenImage {
       matchTextDirection: matchTextDirection,
       gaplessPlayback: gaplessPlayback,
       isAntiAlias: isAntiAlias,
-      package: package,
       filterQuality: filterQuality,
-      cacheWidth: cacheWidth,
-      cacheHeight: cacheHeight,
     );
   }
 
-  String get path => _assetName;
-
-  String get keyName => 'packages/overdrive_components/$_assetName';
+  String get path => assetName;
 }
