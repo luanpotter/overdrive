@@ -5,6 +5,7 @@ import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
 import 'package:flutter/services.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
+import 'package:overdrive_components/src/utils.dart';
 
 const interactDistance = 8;
 
@@ -96,20 +97,18 @@ class KeyboardMovementBehavior extends Behavior<Player>
       if (parent.holdingItem == ItemType.screwdriver) {
         tireRemover.start();
       } else {
-      final closestWorkbench = parent.gameRef.children
-          .whereType<TireFixerWorkbench>()
-          .map((e) => Pair(e, _computeTireFixerWorkbenchDistance(player, e)))
-          .minOrNullBy<num>((p0) => p0.value);
+        final closestWorkbench = parent.gameRef.children
+            .whereType<TireFixerWorkbench>()
+            .map((e) => Pair(e, _computeTireFixerWorkbenchDistance(player, e)))
+            .minOrNullBy<num>((p0) => p0.value);
 
-      if (closestWorkbench != null &&
-          closestWorkbench.key.currentFixingItem != null &&
-          closestWorkbench.value <= interactDistance
-          ) {
-        final fixer = closestWorkbench.key.findBehavior<FixTireBehavior>();
-        fixer.start();
+        if (closestWorkbench != null &&
+            closestWorkbench.key.currentFixingItem != null &&
+            closestWorkbench.value <= interactDistance) {
+          final fixer = closestWorkbench.key.findBehavior<FixTireBehavior>();
+          fixer.start();
+        }
       }
-      }
-
     } else {
       tireRemover.stop();
     }
