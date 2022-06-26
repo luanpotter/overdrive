@@ -118,7 +118,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
         parent.holdingItem = null;
       } else {
         final closestItem = findThings<ItemEntity>(
-          whereCallback: (item) => (item as ItemEntity).realPosition != null,
+          whereCallback: (item) => item.realPosition != null,
           mapCallBack: (player, item) => _computePickupDistance(player, item),
           player: player,
         );
@@ -153,7 +153,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
     return item.body.body.position.distanceTo(player.position);
   }
 
-  Pair? findThings<T>({
+  Pair<T, double>? findThings<T>({
     required MapCallback mapCallBack,
     required Body player,
     WhereCallback? whereCallback,
