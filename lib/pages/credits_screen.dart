@@ -13,7 +13,6 @@ class CreditsScreen extends StatelessWidget {
           children: [
             Header(
               title: 'Credits',
-              backActionButton: () => Navigator.of(context).pushNamed('/'),
             ),
             const SizedBox(
               height: 20,

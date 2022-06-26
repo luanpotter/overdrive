@@ -13,7 +13,6 @@ class StageSelection extends StatelessWidget {
           children: [
             Header(
               title: 'Stages',
-              backActionButton: () => Navigator.of(context).pushNamed('/'),
             ),
             Expanded(
               child: Center(
@@ -26,7 +25,8 @@ class StageSelection extends StatelessWidget {
                     crossAxisSpacing: 30,
                     children: [
                       GestureDetector(
-                        onTap: () => Navigator.of(context).pushNamed('/game'),
+                        onTap: () => Navigator.of(context)
+                            .pushNamed('/character_selection'),
                         child: Container(
                           decoration: BoxDecoration(
                             color: const Color(0XFF9575cd),
