@@ -1,8 +1,9 @@
 import 'package:flame/components.dart';
-import 'package:flame_behaviors/flame_behaviors.dart';
-import 'package:overdrive_components/src/entities/pneumatic_screwdriver/pneumatic_screwdriver_body_component.dart';
 
-class PneumaticScrewdriver extends Entity {
+import '../item_type.dart';
+import 'pneumatic_screwdriver_body_component.dart';
+
+class PneumaticScrewdriver extends ItemEntity {
   PneumaticScrewdriver({
     required Vector2 position,
   }) : super(
@@ -10,8 +11,13 @@ class PneumaticScrewdriver extends Entity {
             PneumaticScrewdriverBodyComponent(startPosition: position),
           ],
         );
-  
+
   PneumaticScrewdriverBodyComponent get body =>
       firstChild<PneumaticScrewdriverBodyComponent>()!;
 
+  @override
+  Vector2 get realPosition => body.body.position;
+
+  @override
+  ItemType itemType = ItemType.screwdriver;
 }
