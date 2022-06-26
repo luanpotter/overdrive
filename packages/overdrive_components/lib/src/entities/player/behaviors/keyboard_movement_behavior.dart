@@ -91,7 +91,28 @@ class KeyboardMovementBehavior extends Behavior<Player>
     }
 
     if (keysPressed.contains(useKey)) {
-      // TODO(elias): use the object;
+      if (parent.holdingItem == ItemType.screwdriver) {
+        final closestTire = parent.gameRef.children
+            .whereType<Car>()
+            .expand((car) => car.tires)
+            .map((tire) => Pair(tire, _computeDistanceToTire(tire)))
+            .minOrNullBy((pair) => pair.value);
+        if (closestTire != null && closestTire.value <= _MIN_DROP_DISTANCE) {
+          final tire = closestTire.key;
+          final car = tire.car;
+          if (car != null) {
+            // remove tire
+            car.body.remove(tire);
+            gameRef.add(
+              Tire(
+                status: tire.status,
+                position: parent.body.body.position + Vector2(2.0, 0),
+                physics: true,
+              ),
+            );
+          }
+        }
+      }
     }
 
     if (keysPressed.contains(pickKey)) {
@@ -143,6 +164,13 @@ class KeyboardMovementBehavior extends Behavior<Player>
       }
     }
     return super.onKeyEvent(event, keysPressed);
+  }
+
+  double _computeDistanceToTire(Tire tire) {
+    final player = parent.body.body;
+    final tirePosition =
+        tire.position + (tire.car?.body.body.position ?? Vector2.zero());
+    return player.position.distanceTo(tirePosition);
   }
 
   static double _computePickupDistance(Body player, ItemEntity item) {
