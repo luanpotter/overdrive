@@ -44,5 +44,5 @@ class Tire extends Entity {
   Tire.damaged({Vector2? position})
       : this._(status: TireStatus.damaged, position: position);
 
-  static final tireSize = Vector2(20, 20);
+  static final tireSize = Vector2(2, 2) * 2;
 }
