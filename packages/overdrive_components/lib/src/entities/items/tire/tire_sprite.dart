@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flame/components.dart';
 
 import 'package:overdrive_components/gen/assets.gen.dart';
@@ -21,6 +23,7 @@ class TireSprite extends SpriteComponent with ParentIsA<Tire> {
     await super.onLoad();
     size = spriteSize;
     sprite = await Sprite.load(spriteAsset);
+    paint = Paint()..filterQuality = FilterQuality.medium..isAntiAlias = false;
   }
 
   @override

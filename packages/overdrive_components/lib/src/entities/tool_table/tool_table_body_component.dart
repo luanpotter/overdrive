@@ -20,11 +20,12 @@ class ToolTableBodyComponent extends BodyComponent with ParentIsA<ToolTable> {
     await super.onLoad();
 
     sprite = await Sprite.load(Assets.images.toolbox.keyName);
+    paint = Paint()..filterQuality = FilterQuality.medium..isAntiAlias = false;
   }
 
   @override
   void render(Canvas canvas) {
-    sprite.render(canvas, size: size);
+    sprite.render(canvas, size: size, overridePaint: paint);
   }
 
   @override
