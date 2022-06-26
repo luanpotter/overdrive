@@ -41,7 +41,9 @@ class TitleScreen extends StatelessWidget {
                   ElevatedButton(
                     child: const Text('Play'),
                     onPressed: () {
-                      FlameAudio.bgm.play('packages/overdrive_components/${Assets.bgm}', volume: 0.4);
+                      if (!FlameAudio.bgm.isPlaying) {
+                        FlameAudio.bgm.play('packages/overdrive_components/${Assets.bgm}', volume: 0.4);
+                      }
                       Navigator.of(context).pushNamed('/stages');
                     },
                   ),
