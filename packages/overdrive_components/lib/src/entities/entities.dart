@@ -8,3 +8,4 @@ export 'items/tire/tire.dart';
 export 'tire_fixer_workbench/tire_fixer_workbench.dart';
 export 'tool_table/tool_table.dart';
 export 'garage_floor.dart';
+export 'car_spot.dart';
