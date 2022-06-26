@@ -7,7 +7,7 @@ import 'package:overdrive_components/src/utils.dart';
 
 class TireFixerWorkbenchBodyComponent extends BodyComponent
     with ParentIsA<TireFixerWorkbench> {
-  static final size = Vector2(9, 6);
+  static final size = Vector2(11.64, 7.43);
 
   late final Sprite sprite;
   final Vector2 startPosition;
