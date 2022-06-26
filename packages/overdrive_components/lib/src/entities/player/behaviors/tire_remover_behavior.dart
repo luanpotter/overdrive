@@ -127,7 +127,7 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
     }
 
     if (parent.holdingItem != ItemType.screwdriver ||
-        _computeDistanceToTire(tire) > interactDistance) {
+        _computeDistanceToTire(tire) > 2 * interactDistance) {
       stop();
     }
     if (_cooldown == 0.0) {
@@ -150,7 +150,7 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
           ),
         );
       } else {
-        if (tire.parent == gameRef) {
+        if (tire.parent != gameRef) {
           // if the tire was attached before
           stop();
           return;
