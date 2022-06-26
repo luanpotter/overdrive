@@ -12,8 +12,8 @@ class TitleScreen extends StatelessWidget {
           height: 320,
           width: 500,
           decoration: BoxDecoration(
-              border: Border.all(color: Color(0xFF4A86E8), width: 10),
-              borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Color(0xFF4A86E8), width: 10),
+            borderRadius: BorderRadius.circular(16),
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -48,7 +48,7 @@ class TitleScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 child: const Text('Credits'),
-                onPressed: () {},
+                onPressed: () => Navigator.of(context).pushNamed('/credits'),
               ),
             ],
           ),
