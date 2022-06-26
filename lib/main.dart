@@ -147,6 +147,9 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
           8.0,
           size.y - TireFixerWorkbench.tireFixerWorkbenchSize.y - 8.0,
         ),
+        behaviors: [
+          FixTireBehavior(),
+        ],
       ),
     );
     add(
@@ -155,6 +158,9 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
           size.x - TireFixerWorkbench.tireFixerWorkbenchSize.x - 8.0,
           8.0,
         ),
+        behaviors: [
+          FixTireBehavior(),
+        ],
       ),
     );
 

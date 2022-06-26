@@ -1,3 +1,4 @@
+import 'package:dartlin/dartlin.dart';
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
@@ -95,7 +96,21 @@ class KeyboardMovementBehavior extends Behavior<Player>
     if (keysPressed.contains(useKey)) {
       if (parent.holdingItem == ItemType.screwdriver) {
         tireRemover.start();
+      } else {
+      final closestWorkbench = parent.gameRef.children
+          .whereType<TireFixerWorkbench>()
+          .map((e) => Pair(e, _computeTireFixerWorkbenchDistance(player, e)))
+          .minOrNullBy<num>((p0) => p0.value);
+
+      if (closestWorkbench != null &&
+          closestWorkbench.key.currentFixingItem != null &&
+          closestWorkbench.value <= interactDistance
+          ) {
+        final fixer = closestWorkbench.key.findBehavior<FixTireBehavior>();
+        fixer.start();
       }
+      }
+
     } else {
       tireRemover.stop();
     }
@@ -105,7 +120,12 @@ class KeyboardMovementBehavior extends Behavior<Player>
     }
 
     return super.onKeyEvent(event, keysPressed);
-  }  
+  }
+
+  static double _computeTireFixerWorkbenchDistance(
+      Body player, TireFixerWorkbench item) {
+    return item.body.body.position.distanceTo(player.position);
+  }
 
   @override
   void update(double dt) {
