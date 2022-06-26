@@ -20,4 +20,4 @@ dev_dependencies:
   flame_lint: 0.1.0
 
 flutter:
-  uses-material-design: false
+  uses-material-design: true
