@@ -28,14 +28,14 @@ class TitleScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 child: const Text('Settings'),
-                onPressed: () => {},
+                onPressed: () {},
               ),
               const SizedBox(
                 height: 16,
               ),
               ElevatedButton(
                 child: const Text('Credits'),
-                onPressed: () => {},
+                onPressed: () {},
               ),
             ],
           ),
