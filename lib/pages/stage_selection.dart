@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:overdrive/components/header.dart';
 
 class StageSelection extends StatelessWidget {
   @override
@@ -8,23 +9,9 @@ class StageSelection extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: GestureDetector(
-                onTap: () => Navigator.of(context).pushNamed('/'),
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                  size: 50,
-                ),
-              ),
-            ),
-            const Text(
-              'Stages',
-              style: TextStyle(
-                fontSize: 50,
-                color: Colors.white,
-              ),
+            Header(
+              title: 'Stages',
+              backActionButton: () => Navigator.of(context).pushNamed('/'),
             ),
             Expanded(
               child: Center(
