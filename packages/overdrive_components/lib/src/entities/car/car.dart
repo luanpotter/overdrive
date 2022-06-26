@@ -56,4 +56,6 @@ class Car extends Entity with HasGameRef {
   }
 
   CarBodyComponent get body => firstChild<CarBodyComponent>()!;
+
+  Iterable<Tire> get tires => body.children.whereType<Tire>();
 }
