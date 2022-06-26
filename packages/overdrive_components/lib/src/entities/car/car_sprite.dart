@@ -13,6 +13,10 @@ final _carColors = <String>[
 class CarSpriteComposite extends PositionComponent {
   static Vector2 get spriteSize => Vector2(6.25, 2.77) * 3;
 
+  static Vector2 get frontTirePosition => Vector2(13.2, 6);
+
+  static Vector2 get backTirePosition => Vector2(3.5, 6);
+
   final List<Component> childrenInBetween;
   final CarSprite carSprite;
 

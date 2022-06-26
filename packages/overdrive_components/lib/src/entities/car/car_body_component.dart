@@ -3,7 +3,7 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/utils.dart';
 
-import 'car_sprite.dart';
+import 'package:overdrive_components/src/entities/car/car_sprite.dart';
 
 class CarBodyComponent extends BodyComponent with ParentIsA<Car> {
   final Vector2 startPosition;

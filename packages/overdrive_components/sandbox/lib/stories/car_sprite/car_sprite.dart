@@ -8,12 +8,18 @@ void addCarSpriteStories(Dashbook dashbook) {
     'Any color',
     (context) {
       final carSprite = CarSpriteComposite(
-        childrenInBetween: [],
+        childrenInBetween: [
+          TireSprite.repaired(CarSpriteComposite.frontTirePosition),
+          TireSprite.damaged(CarSpriteComposite.backTirePosition),
+        ],
         carSprite: CarSprite.anyColor(),
       );
 
       return GameWidget(
-        game: StoryGame(center: false, carSprite,),
+        game: StoryGame(
+          center: true,
+          carSprite,
+        ),
       );
     },
   );

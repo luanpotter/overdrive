@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:overdrive_components/src/entities/car/car.dart';
 import 'package:overdrive_components/src/entities/car/car_body_component.dart';
 import 'package:overdrive_components/src/entities/items/tire/tire_body_component.dart';
-
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/items/tire/tire_body_component.dart';
+
+export './tire_sprite.dart';
 
 enum TireStatus {
   normal(),
