@@ -47,10 +47,19 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
         mapCallBack: _computePickupDistance,
       );
 
+      final closestTireFixerWorkbench = findThings<TireFixerWorkbench>(
+        mapCallBack: _computeTireFixerWorkbenchDistance,
+      );
+
       if (closestItem != null && closestItem.value <= interactDistance) {
         parent.holdingItem = closestItem.key.itemType;
         parent.gameRef.remove(closestItem.key);
         pickCooldown = 0.25;
+      } else if (closestTireFixerWorkbench != null &&
+          closestTireFixerWorkbench.value <= interactDistance &&
+          closestTireFixerWorkbench.key.currentFixingItem != null) {
+        parent.holdingItem = closestTireFixerWorkbench.key.currentFixingItem;
+        closestTireFixerWorkbench.key.currentFixingItem = null;
       } else {
         final closestToolTable = findThings<ToolTable>(
           mapCallBack: _computeToolTableDistance,
