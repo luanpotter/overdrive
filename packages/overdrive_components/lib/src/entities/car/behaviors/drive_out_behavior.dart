@@ -9,7 +9,7 @@ class DriveOutBehavior extends Behavior<Car> with HasGameRef {
       parent.findBehavior<DriveInBehavior>().removeFromParent();
     }
     final car = parent.body.body;
-    final target = gameRef.size.x - CarSprite.spriteSize.x;
+    final target = gameRef.size.x;
     if (car.position.x >= target) {
       parent.removeFromParent();
     } else {
