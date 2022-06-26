@@ -12,6 +12,8 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/car_frame.png');
   AssetGenImage get carWheel =>
       const AssetGenImage('assets/images/car_wheel.png');
+  AssetGenImage get floorPattern =>
+      const AssetGenImage('assets/images/floor_pattern.png');
   AssetGenImage get player => const AssetGenImage('assets/images/player.png');
   AssetGenImage get reference =>
       const AssetGenImage('assets/images/reference.png');
