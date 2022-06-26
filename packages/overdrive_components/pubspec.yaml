@@ -24,6 +24,7 @@ dev_dependencies:
 
 flutter:
   assets:
+   - assets/
    - assets/images/
    - assets/images/title_screen/
    - assets/images/car/

@@ -1,5 +1,7 @@
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
+import 'package:overdrive_components/gen/assets.gen.dart';
 import 'package:overdrive_components/overdrive_components.dart';
 
 class TitleScreen extends StatelessWidget {
@@ -38,7 +40,10 @@ class TitleScreen extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     child: const Text('Play'),
-                    onPressed: () => Navigator.of(context).pushNamed('/stages'),
+                    onPressed: () {
+                      FlameAudio.bgm.play('packages/overdrive_components/${Assets.bgm}', volume: 0.4);
+                      Navigator.of(context).pushNamed('/stages');
+                    },
                   ),
                   const SizedBox(
                     height: 16,
