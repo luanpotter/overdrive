@@ -91,7 +91,9 @@ class KeyboardMovementBehavior extends Behavior<Player>
     }
 
     if (keysPressed.contains(useKey)) {
-      // TODO(elias): use the object;
+      if (parent.holdingItem == ItemType.screwdriver) {
+        // TODO(luan): remove tire
+      }
     }
 
     if (keysPressed.contains(pickKey)) {

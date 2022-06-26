@@ -2,6 +2,8 @@ import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/material.dart';
 
+import 'tire_body_component.dart';
+
 enum TireStatus {
   normal(),
   damaged();
@@ -27,22 +29,35 @@ final _damagedTirePaint = Paint()
   ..style = PaintingStyle.fill;
 
 class Tire extends Entity {
-  Tire._({required TireStatus status, Vector2? position})
-      : super(
+  Tire._({
+    required TireStatus status,
+    required Vector2 position,
+    required bool physics,
+  }) : super(
           size: tireSize,
           anchor: Anchor.center,
           position: position,
           children: [
             CircleComponent.relative(1, parentSize: tireSize)
               ..paint = status.toPaint(),
+            if (physics) TireBodyComponent(startPosition: position),
           ],
         );
 
-  Tire.normal({Vector2? position})
-      : this._(status: TireStatus.normal, position: position);
+  Tire.normal({required Vector2 position, required bool physics})
+      : this._(
+          status: TireStatus.normal,
+          position: position,
+          physics: physics,
+        );
 
-  Tire.damaged({Vector2? position})
-      : this._(status: TireStatus.damaged, position: position);
+  Tire.damaged({required Vector2 position, required bool physics})
+      : this._(
+          status: TireStatus.damaged,
+          position: position,
+          physics: physics,
+        );
 
-  static final tireSize = Vector2(2, 2) * 2;
+  static final tireRadius = 2.0;
+  static final tireSize = Vector2.all(2 * tireRadius);
 }

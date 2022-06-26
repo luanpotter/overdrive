@@ -19,13 +19,13 @@ class CarBodyComponent extends BodyComponent with ParentIsA<Car> {
     );
     switch (parent.status) {
       case CarStatus.damaged:
-        add(Tire.damaged(position: leftTirePosition));
-        add(Tire.normal(position: rightTirePosition));
+        add(Tire.damaged(position: leftTirePosition, physics: false));
+        add(Tire.normal(position: rightTirePosition, physics: false));
         break;
 
       case CarStatus.repaired:
-        add(Tire.normal(position: leftTirePosition));
-        add(Tire.normal(position: rightTirePosition));
+        add(Tire.normal(position: leftTirePosition, physics: false));
+        add(Tire.normal(position: rightTirePosition, physics: false));
         break;
     }
 
