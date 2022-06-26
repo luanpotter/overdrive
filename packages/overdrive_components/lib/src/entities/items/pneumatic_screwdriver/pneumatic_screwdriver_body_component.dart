@@ -15,6 +15,8 @@ class PneumaticScrewdriverBodyComponent extends BodyComponent
 
   @override
   Body createBody() {
+    renderBody = false;
+
     final def = BodyDef()
       ..type = BodyType.kinematic
       ..position = startPosition;
