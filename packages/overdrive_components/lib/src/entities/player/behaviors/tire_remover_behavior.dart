@@ -43,7 +43,7 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
         .expand((car) => car.tires)
         .map((tire) => Pair(tire, _computeDistanceToTire(tire)))
         .minOrNullBy<num>((pair) => pair.value);
-    if (closestCarTire != null && closestCarTire.value <= minDropDistance) {
+    if (closestCarTire != null && closestCarTire.value <= interactDistance) {
       final tire = closestCarTire.key;
       final car = tire.car;
       if (car != null) {
@@ -64,7 +64,7 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
         )
         .minOrNullBy<num>((details) => details.distance);
     if (closestNonCarTire != null &&
-        closestNonCarTire.distance <= minDropDistance) {
+        closestNonCarTire.distance <= interactDistance) {
       final tire = closestNonCarTire.tire;
       if (tire.car == null) {
         final closestCar = closestNonCarTire.carSpot;
@@ -110,7 +110,7 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
     }
 
     if (parent.holdingItem != ItemType.screwdriver ||
-        _computeDistanceToTire(tire) > minDropDistance) {
+        _computeDistanceToTire(tire) > interactDistance) {
       stop();
     }
     if (_cooldown == 0.0) {
@@ -143,7 +143,7 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
 
   double _computeDistanceToTire(Tire tire) {
     final tirePosition =
-        tire.position + (tire.car?.body.body.position ?? Vector2.zero());
+        tire.sprite.position + (tire.car?.body.body.position ?? Vector2.zero());
     return player.position.distanceTo(tirePosition);
   }
 }

@@ -61,9 +61,17 @@ class Tire extends ItemEntity {
           physics: physics,
         );
 
-  Car? get car => (parent as CarBodyComponent?)?.parent;
+  Car? get car {
+    final p = parent;
+    if (p is CarBodyComponent) {
+      return p.parent;
+    }
+    return null;
+  }
 
   TireBodyComponent? get body => firstChild<TireBodyComponent>();
+
+  TireSprite get sprite => firstChild<TireSprite>()!;
 
   static const tireRadius = 2.0;
   static final tireSize = Vector2.all(2 * tireRadius);
