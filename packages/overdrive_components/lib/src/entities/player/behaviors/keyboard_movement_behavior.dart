@@ -156,7 +156,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
   Pair<T, double>? findThings<T>({
     required MapCallback mapCallBack,
     required Body player,
-    WhereCallback? whereCallback,
+    WhereCallback<T>? whereCallback,
   }) =>
       parent.gameRef.children
           .whereType<T>()
