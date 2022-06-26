@@ -11,12 +11,23 @@ final _carColors = <String>[
   Assets.images.car.carFrontCyan.keyName,
 ];
 
+enum TireSpot { back, front }
+
 class CarSprite extends SpriteComponent {
   static Vector2 get spriteSize => Vector2(6.25, 2.77) * 4;
 
   static Vector2 get frontTirePosition => Vector2(17.6, 8.5);
 
   static Vector2 get backTirePosition => Vector2(4.7, 8.5);
+
+  static Vector2 getTirePosition(TireSpot spot) {
+    switch (spot) {
+      case TireSpot.back:
+        return backTirePosition;
+      case TireSpot.front:
+        return frontTirePosition;
+    }
+  }
 
   factory CarSprite.anyColor() {
     final random = Random();

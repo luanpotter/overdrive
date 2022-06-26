@@ -155,7 +155,7 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
 
     // init screwdriver on toolTable;
     toolTable.holdingItem = ItemType.screwdriver;
-    
+
     spawnCar();
   }
 

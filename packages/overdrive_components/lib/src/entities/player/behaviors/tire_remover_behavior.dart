@@ -8,9 +8,24 @@ import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
 import 'package:overdrive_components/src/utils.dart';
 
+class CloseToTireDetails {
+  final CarSpot carSpot;
+  final Tire tire;
+  final double distance;
+
+  CloseToTireDetails(this.carSpot, this.tire, this.distance);
+}
+
+class CarSpot {
+  final Car car;
+  final TireSpot spot;
+
+  CarSpot(this.car, this.spot);
+}
+
 class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
   Tire? _tire;
-  Car? _car; // if null: removing tire. if set: adding tire
+  CarSpot? _carSpot; // if null: removing tire. if set: adding tire
   double _cooldown = 0.0;
 
   Body get player => parent.body.body;
@@ -44,37 +59,35 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
     final cars = parent.gameRef.children.whereType<Car>();
     final closestNonCarTire = parent.gameRef.children
         .whereType<Tire>()
-        .map((tire) => Pair(tire, _computeDistanceToTire(tire)))
-        .where((tire) => cars.any((car) => _isCloseToCar(car, tire.key)))
-        .minOrNullBy<num>((pair) => pair.value);
+        .expand(
+          (tire) => cars.expand((car) => _computeDistanceToCar(car, tire)),
+        )
+        .minOrNullBy<num>((details) => details.distance);
     if (closestNonCarTire != null &&
-        closestNonCarTire.value <= minDropDistance) {
-      final tire = closestNonCarTire.key;
-      final car = tire.car;
-      if (car == null) {
-        final closestCar = cars.minOrNullBy<num>(
-          (car) => _computeDistanceToCar(car, tire) ?? double.maxFinite,
-        );
+        closestNonCarTire.distance <= minDropDistance) {
+      final tire = closestNonCarTire.tire;
+      if (tire.car == null) {
+        final closestCar = closestNonCarTire.carSpot;
         _tire = tire;
         _cooldown = 2.0;
-        _car = closestCar;
+        _carSpot = closestCar;
       }
     }
   }
 
-  bool _isCloseToCar(Car car, Tire tire) {
-    final distance = _computeDistanceToCar(car, tire);
-    return distance != null && distance < minDropDistance;
-  }
-
-  double? _computeDistanceToCar(Car car, Tire tire) {
-    // TODO(luan): use renan's tire positions
+  List<CloseToTireDetails> _computeDistanceToCar(Car car, Tire tire) {
     final tireBody = tire.body;
     if (tireBody == null) {
-      return null;
+      return [];
     }
 
-    return car.body.body.position.distanceTo(tireBody.body.position);
+    final carPosition = car.body.body.position;
+    return TireSpot.values.map((spot) {
+      final offset = CarSprite.getTirePosition(spot);
+      final distance =
+          (carPosition + offset).distanceTo(tireBody.body.position);
+      return CloseToTireDetails(CarSpot(car, spot), tire, distance);
+    }).toList();
   }
 
   void stop() {
@@ -101,8 +114,8 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
       stop();
     }
     if (_cooldown == 0.0) {
-      final existingCar = _car;
-      if (existingCar == null) {
+      final existingCarSpot = _carSpot;
+      if (existingCarSpot == null) {
         // remove from car
         final car = tire.car;
         if (car != null) {
@@ -119,13 +132,9 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
       } else {
         // re-attach to car
         gameRef.remove(tire);
-        existingCar.add(
-          Tire(
-            status: tire.status,
-            // TODO(luan) find closest spot
-            position: existingCar.body.leftTirePosition,
-            physics: false,
-          ),
+        existingCarSpot.car.body.addTire(
+          status: tire.status,
+          spot: existingCarSpot.spot,
         );
       }
       stop();
