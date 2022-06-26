@@ -21,7 +21,9 @@ class TireFixerWorkbenchBodyComponent extends BodyComponent
     await super.onLoad();
 
     sprite = await Sprite.load(Assets.images.tireFixerWorkbench.keyName);
-    paint = Paint()..filterQuality = FilterQuality.medium..isAntiAlias = false;
+    paint = Paint()
+      ..filterQuality = FilterQuality.medium
+      ..isAntiAlias = false;
   }
 
   @override
@@ -36,9 +38,14 @@ class TireFixerWorkbenchBodyComponent extends BodyComponent
       ..position = startPosition;
     final body = world.createBody(def)..userData = this;
 
+    final filter = Filter()
+      ..categoryBits = 0x0010
+      ..maskBits = 0xFF0F;
     final fixtureDef = FixtureDef(
       size.toRect().toPolygonShape(),
-    )..restitution = 1.0;
+    )
+      ..restitution = 1.0
+      ..filter = filter;
     body.createFixture(fixtureDef);
     return body;
   }
