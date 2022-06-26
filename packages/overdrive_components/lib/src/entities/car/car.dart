@@ -4,6 +4,7 @@ import 'package:overdrive_components/overdrive_components.dart';
 import 'package:overdrive_components/src/entities/car/car_body_component.dart';
 
 export 'behaviors/behaviors.dart';
+export 'car_sprite.dart';
 
 enum CarStatus {
   damaged,

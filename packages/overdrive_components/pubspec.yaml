@@ -25,6 +25,7 @@ flutter:
   assets:
    - assets/images/
    - assets/images/title_screen/
+   - assets/images/car/
 
 flutter_gen:
   line_length: 80
