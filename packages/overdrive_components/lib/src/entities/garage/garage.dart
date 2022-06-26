@@ -17,7 +17,6 @@ class Garage extends Entity with HasGameRef {
     await super.onLoad();
 
     final delta = Vector2.all(4);
-<<<<<<< Updated upstream
     final size = gameRef.size - (delta * 2);
     await add(
       GarageBorderBody(
@@ -27,14 +26,6 @@ class Garage extends Entity with HasGameRef {
     );
 
     add(GarageFloor(position: delta, size: size));
-=======
-    // await add(
-    //   GarageBorderBody(
-    //     position: delta,
-    //     size: gameRef.size - (delta * 2),
-    //   ),
-    // );
->>>>>>> Stashed changes
   }
 
   @override
