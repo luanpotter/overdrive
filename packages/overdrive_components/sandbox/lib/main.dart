@@ -10,7 +10,6 @@ void main() {
   // updating flame assets prefix
   Flame.images.prefix = '';
 
-  //addCarSpriteStories(dashbook);
   addCarStories(dashbook);
   addGarageStories(dashbook);
   addPlayerStories(dashbook);
