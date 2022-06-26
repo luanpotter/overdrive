@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/palette.dart';
@@ -8,7 +10,7 @@ import 'garage_border_body.dart';
 
 class Garage extends Entity with HasGameRef {
   static final _paint = BasicPalette.white.paint();
-  static final _carSpotPaint = BasicPalette.red.paint();
+  static final _carSpotPaint = Paint()..color = const Color(0xFFCCCCCC);
 
   @override
   Future<void> onLoad() async {
