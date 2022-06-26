@@ -51,18 +51,18 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
         parent.holdingItem = closestItem.key.itemType;
         parent.gameRef.remove(closestItem.key);
         pickCooldown = 0.25;
-      }
+      } else {
+        final closestToolTable = findThings<ToolTable>(
+          mapCallBack: _computeToolTableDistance,
+        );
 
-      final closestToolTable = findThings<ToolTable>(
-        mapCallBack: _computeToolTableDistance,
-      );
-
-      if (closestToolTable != null &&
-          closestToolTable.value <= interactDistance &&
-          closestToolTable.key.holdingItem != null) {
-        parent.holdingItem = closestToolTable.key.holdingItem;
-        closestToolTable.key.holdingItem = null;
-        pickCooldown = 0.25;
+        if (closestToolTable != null &&
+            closestToolTable.value <= interactDistance &&
+            closestToolTable.key.holdingItem != null) {
+          parent.holdingItem = closestToolTable.key.holdingItem;
+          closestToolTable.key.holdingItem = null;
+          pickCooldown = 0.25;
+        }
       }
     }
   }
