@@ -22,7 +22,8 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
       );
 
       if (closestToolTable != null &&
-          closestToolTable.value <= minDropDistance) {
+          closestToolTable.key.holdingItem == null &&
+          closestToolTable.value <= interactDistance) {
         closestToolTable.key.holdingItem = currentHoldingItem;
       } else {
         final entity = currentHoldingItem.spawn(
@@ -40,7 +41,7 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
         mapCallBack: _computePickupDistance,
       );
 
-      if (closestItem != null && closestItem.value <= maxPickupDistance) {
+      if (closestItem != null && closestItem.value <= interactDistance) {
         parent.holdingItem = closestItem.key.itemType;
         parent.gameRef.remove(closestItem.key);
         pickCooldown = 0.25;
@@ -51,7 +52,7 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
       );
 
       if (closestToolTable != null &&
-          closestToolTable.value <= maxPickupDistance &&
+          closestToolTable.value <= interactDistance &&
           closestToolTable.key.holdingItem != null) {
         parent.holdingItem = closestToolTable.key.holdingItem;
         closestToolTable.key.holdingItem = null;

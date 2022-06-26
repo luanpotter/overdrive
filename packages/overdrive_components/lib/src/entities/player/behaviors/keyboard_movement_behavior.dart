@@ -5,8 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
 
-const maxPickupDistance = 7.5;
-const minDropDistance = 10.5;
+const interactDistance = 12;
 
 typedef MapCallback<T> = double Function(Body player, T item);
 typedef WhereCallback<T> = bool Function(T item);
@@ -91,7 +90,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
       _runFactor = 1;
     }
 
-    final tireRemover = parent.findBehavior<TireRemoverBehavior>();
+    final tireRemover = parent.findBehavior<TireScrewerBehavior>();
     if (keysPressed.contains(useKey)) {
       if (parent.holdingItem == ItemType.screwdriver) {
         tireRemover.start();

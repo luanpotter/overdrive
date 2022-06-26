@@ -10,19 +10,38 @@ class CarBodyComponent extends BodyComponent with ParentIsA<Car> {
     required this.startPosition,
   });
 
+  Future<void> addTire({
+    required TireStatus status,
+    required TireSpot spot,
+  }) async {
+    return add(_getTire(status, CarSprite.getTirePosition(spot)));
+  }
+
+  Tire _getTire(
+    TireStatus status,
+    Vector2 position,
+  ) {
+    switch (status) {
+      case TireStatus.normal:
+        return Tire.normal(position: position, physics: false);
+      case TireStatus.damaged:
+        return Tire.damaged(position: position, physics: false);
+    }
+  }
+
   @override
   Future<void> onLoad() async {
     await add(CarSpriteBackground());
 
     switch (parent.status) {
       case CarStatus.damaged:
-        add(Tire.damaged(position: CarSprite.backTirePosition, physics: false));
-        add(Tire.normal(position: CarSprite.frontTirePosition, physics: false));
+        await addTire(status: TireStatus.damaged, spot: TireSpot.back);
+        await addTire(status: TireStatus.normal, spot: TireSpot.front);
         break;
 
       case CarStatus.repaired:
-        add(Tire.normal(position: CarSprite.backTirePosition, physics: false));
-        add(Tire.normal(position: CarSprite.frontTirePosition, physics: false));
+        await addTire(status: TireStatus.normal, spot: TireSpot.back);
+        await addTire(status: TireStatus.normal, spot: TireSpot.front);
         break;
     }
 

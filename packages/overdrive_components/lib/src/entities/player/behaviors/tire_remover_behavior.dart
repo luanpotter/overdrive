@@ -8,27 +8,43 @@ import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
 import 'package:overdrive_components/src/utils.dart';
 
-class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
+class CloseToTireDetails {
+  final CarSpot carSpot;
+  final Tire tire;
+  final double distance;
+
+  CloseToTireDetails(this.carSpot, this.tire, this.distance);
+}
+
+class CarSpot {
+  final Car car;
+  final TireSpot spot;
+
+  CarSpot(this.car, this.spot);
+}
+
+class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
   Tire? _tire;
+  CarSpot? _carSpot; // if null: removing tire. if set: adding tire
   double _cooldown = 0.0;
 
   Body get player => parent.body.body;
 
-  bool get isRemovingTire => _tire != null;
+  bool get isScrewingTire => _tire != null;
 
   void start() {
-    if (isRemovingTire) {
+    if (isScrewingTire) {
       return;
     }
     FlameAudio.audioCache.prefix = '';
 
-    final closestTire = parent.gameRef.children
+    final closestCarTire = parent.gameRef.children
         .whereType<Car>()
         .expand((car) => car.tires)
         .map((tire) => Pair(tire, _computeDistanceToTire(tire)))
         .minOrNullBy<num>((pair) => pair.value);
-    if (closestTire != null && closestTire.value <= minDropDistance) {
-      final tire = closestTire.key;
+    if (closestCarTire != null && closestCarTire.value <= interactDistance) {
+      final tire = closestCarTire.key;
       final car = tire.car;
       if (car != null) {
         FlameAudio.play(
@@ -36,8 +52,42 @@ class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
         );
         _tire = tire;
         _cooldown = 2.0;
+        return;
       }
     }
+
+    final cars = parent.gameRef.children.whereType<Car>();
+    final closestNonCarTire = parent.gameRef.children
+        .whereType<Tire>()
+        .expand(
+          (tire) => cars.expand((car) => _computeDistanceToCar(car, tire)),
+        )
+        .minOrNullBy<num>((details) => details.distance);
+    if (closestNonCarTire != null &&
+        closestNonCarTire.distance <= interactDistance) {
+      final tire = closestNonCarTire.tire;
+      if (tire.car == null) {
+        final closestCar = closestNonCarTire.carSpot;
+        _tire = tire;
+        _cooldown = 2.0;
+        _carSpot = closestCar;
+      }
+    }
+  }
+
+  List<CloseToTireDetails> _computeDistanceToCar(Car car, Tire tire) {
+    final tireBody = tire.body;
+    if (tireBody == null) {
+      return [];
+    }
+
+    final carPosition = car.body.body.position;
+    return TireSpot.values.map((spot) {
+      final offset = CarSprite.getTirePosition(spot);
+      final distance =
+          (carPosition + offset).distanceTo(tireBody.body.position);
+      return CloseToTireDetails(CarSpot(car, spot), tire, distance);
+    }).toList();
   }
 
   void stop() {
@@ -60,20 +110,31 @@ class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
     }
 
     if (parent.holdingItem != ItemType.screwdriver ||
-        _computeDistanceToTire(tire) > minDropDistance) {
+        _computeDistanceToTire(tire) > interactDistance) {
       stop();
     }
     if (_cooldown == 0.0) {
-      final car = tire.car;
-      if (car != null) {
-        // remove tire
-        car.body.remove(tire);
-        gameRef.add(
-          Tire(
-            status: tire.status,
-            position: parent.body.body.position + Vector2(2.0, 0),
-            physics: true,
-          ),
+      final existingCarSpot = _carSpot;
+      if (existingCarSpot == null) {
+        // remove from car
+        final car = tire.car;
+        if (car != null) {
+          // remove tire
+          car.body.remove(tire);
+          gameRef.add(
+            Tire(
+              status: tire.status,
+              position: parent.body.body.position + Vector2(2.0, 0),
+              physics: true,
+            ),
+          );
+        }
+      } else {
+        // re-attach to car
+        gameRef.remove(tire);
+        existingCarSpot.car.body.addTire(
+          status: tire.status,
+          spot: existingCarSpot.spot,
         );
       }
       stop();
@@ -81,8 +142,12 @@ class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
   }
 
   double _computeDistanceToTire(Tire tire) {
+    final sprite = tire.sprite;
+    if (sprite == null) {
+      return double.maxFinite;
+    }
     final tirePosition =
-        tire.position + (tire.car?.body.body.position ?? Vector2.zero());
+        sprite.position + (tire.car?.body.body.position ?? Vector2.zero());
     return player.position.distanceTo(tirePosition);
   }
 }
