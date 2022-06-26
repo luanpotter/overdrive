@@ -69,7 +69,7 @@ class Tire extends ItemEntity {
   static final tireSize = Vector2.all(2 * tireRadius);
 
   @override
-  ItemType get itemType => ItemType.demange_tire;
+  ItemType get itemType => ItemType.demageTire;
 
   @override
   Vector2? get realPosition => body?.body.position;
