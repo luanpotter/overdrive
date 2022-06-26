@@ -1,7 +1,13 @@
+import 'package:dartlin/dartlin.dart';
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
+import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
 import 'package:flutter/services.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
+import 'package:overdrive_components/src/entities/items/item_type.dart';
+import 'package:overdrive_components/src/utils.dart';
+
+const _MAX_PICKUP_DISTANCE = 6.0;
 
 class KeyboardMovementBehavior extends Behavior<Player>
     with KeyboardHandler, HasGameRef {
@@ -86,9 +92,29 @@ class KeyboardMovementBehavior extends Behavior<Player>
     }
 
     if (keysPressed.contains(pickKey)) {
-      // TODO(elias): pick something;
+      final player = parent.body.body;
+      final currentHoldingItem = parent.holdingItem;
+      if (currentHoldingItem != null) {
+        final entity =
+            currentHoldingItem.spawn(player.position + Vector2(2.0, 0));
+        parent.gameRef.add(entity);
+        parent.holdingItem = null;
+      } else {
+        final closestItem = parent.gameRef.children
+            .whereType<ItemEntity>()
+            .map((item) => Pair(item, _computePickupDistance(player, item)))
+            .minOrNullBy((pair) => pair.value);
+        if (closestItem != null && closestItem.value <= _MAX_PICKUP_DISTANCE) {
+          parent.holdingItem = closestItem.key.itemType;
+          parent.gameRef.remove(closestItem.key);
+        }
+      }
     }
     return super.onKeyEvent(event, keysPressed);
+  }
+
+  static double _computePickupDistance(Body player, ItemEntity item) {
+    return item.realPosition.distanceTo(player.position);
   }
 
   @override
