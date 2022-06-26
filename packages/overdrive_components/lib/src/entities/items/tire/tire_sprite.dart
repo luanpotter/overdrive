@@ -4,7 +4,7 @@ import 'package:overdrive_components/gen/assets.gen.dart';
 import 'package:overdrive_components/overdrive_components.dart';
 
 class TireSprite extends SpriteComponent with ParentIsA<Tire> {
-  static Vector2 get spriteSize => Vector2(4.32, 4.49) * 0.7;
+  static Vector2 get spriteSize => Vector2(4.32, 4.49) * 0.9;
 
   TireSprite.repaired(Vector2? position)
       : this._(Assets.images.car.tyre.keyName, position);
@@ -25,11 +25,11 @@ class TireSprite extends SpriteComponent with ParentIsA<Tire> {
 
   @override
   void update(double dt) {
-    // final body = parent.body;
-    // if (body == null) {
-    //   return;
-    // }
-    //
-    // position = body.body.position;
+    final body = parent.body;
+    if (body == null) {
+      return;
+    }
+
+    position = body.body.position;
   }
 }

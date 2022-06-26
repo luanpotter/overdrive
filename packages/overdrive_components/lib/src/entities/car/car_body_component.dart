@@ -33,6 +33,7 @@ class CarBodyComponent extends BodyComponent with ParentIsA<Car> {
 
   @override
   Body createBody() {
+    renderBody = false;
     final def = BodyDef()
       ..type = BodyType.dynamic
       ..position = startPosition;
@@ -42,7 +43,7 @@ class CarBodyComponent extends BodyComponent with ParentIsA<Car> {
       ..categoryBits = 0x0010
       ..maskBits = 0xFF0F;
     final fixtureDef = FixtureDef(
-      Car.carSize.toRect().toPolygonShape(),
+      CarSprite.spriteSize.toRect().toPolygonShape(),
     )
       ..restitution = 1.0
       ..filter = filter;

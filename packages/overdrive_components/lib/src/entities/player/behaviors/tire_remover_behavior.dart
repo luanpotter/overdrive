@@ -31,7 +31,8 @@ class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
       final tire = closestTire.key;
       final car = tire.car;
       if (car != null) {
-        FlameAudio.play('packages/overdrive_components/${Assets.sfx.screwDriver}');
+        FlameAudio.play(
+            'packages/overdrive_components/${Assets.sfx.screwDriver}');
         _tire = tire;
         _cooldown = 2.0;
       }

@@ -12,11 +12,11 @@ final _carColors = <String>[
 ];
 
 class CarSprite extends SpriteComponent {
-  static Vector2 get spriteSize => Vector2(6.25, 2.77) * 3;
+  static Vector2 get spriteSize => Vector2(6.25, 2.77) * 4;
 
-  static Vector2 get frontTirePosition => Vector2(7.3, 3.8);
+  static Vector2 get frontTirePosition => Vector2(17.6, 8.5);
 
-  static Vector2 get backTirePosition => Vector2(2.5, 3.8);
+  static Vector2 get backTirePosition => Vector2(4.7, 8.5);
 
   factory CarSprite.anyColor() {
     final random = Random();

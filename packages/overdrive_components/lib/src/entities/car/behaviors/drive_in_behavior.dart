@@ -6,7 +6,7 @@ class DriveInBehavior extends Behavior<Car> with HasGameRef {
   @override
   void update(double dt) {
     final car = parent.body.body;
-    final target = (gameRef.size.x - Car.carSize.x) / 2;
+    final target = (gameRef.size.x - CarSprite.spriteSize.x) / 2;
     if (car.position.x >= target) {
       car.linearVelocity = Vector2.zero();
     } else if (target - car.position.x < 4) {
