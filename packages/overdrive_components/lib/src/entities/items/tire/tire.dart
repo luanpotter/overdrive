@@ -1,5 +1,4 @@
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
 import 'package:overdrive_components/src/entities/car/car_body_component.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/items/tire/tire_body_component.dart';
@@ -11,27 +10,10 @@ enum TireStatus {
   damaged();
 
   const TireStatus();
-
-  Paint toPaint() {
-    switch (this) {
-      case TireStatus.normal:
-        return _normalTirePaint;
-      case TireStatus.damaged:
-        return _damagedTirePaint;
-    }
-  }
 }
 
-final _normalTirePaint = Paint()
-  ..color = Colors.black
-  ..style = PaintingStyle.fill;
-
-final _damagedTirePaint = Paint()
-  ..color = Colors.red
-  ..style = PaintingStyle.fill;
-
 class Tire extends ItemEntity {
-  final TireStatus status;
+  TireStatus status;
 
   Tire({
     required this.status,
@@ -87,6 +69,18 @@ class Tire extends ItemEntity {
     }
   }
 
+  void repair() {
+    if (status == TireStatus.normal) {
+      return;
+    }
+    status = TireStatus.normal;
+    final prevPos = _sprite.position;
+    _sprite.removeFromParent();
+    add(TireSprite.repaired(prevPos));
+  }
+
   @override
   Vector2? get realPosition => body?.body.position;
+
+  TireSprite get _sprite => firstChild<TireSprite>()!;
 }

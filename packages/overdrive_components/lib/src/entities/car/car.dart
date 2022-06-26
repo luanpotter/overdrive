@@ -35,6 +35,8 @@ class Car extends Entity with HasGameRef {
   final bool startRepaired;
   final int lane;
 
+  late final TimerComponent timer;
+
   CarStatus get status {
     final hasAnyDamaged =
         tires.any((element) => element.status == TireStatus.damaged);
@@ -50,10 +52,23 @@ class Car extends Entity with HasGameRef {
   }
 
   @override
-  Future<void>? onLoad() async {
+  Future<void> onLoad() async {
     final position = _computeStartPosition();
     await add(CarBodyComponent(startPosition: position));
+    await add(
+      timer = TimerComponent(
+        period: 1,
+        repeat: true,
+        onTick: verifyLeave,
+      ),
+    );
     return super.onLoad();
+  }
+
+  void verifyLeave() {
+    if (status == CarStatus.repaired) {
+      add(DriveOutBehavior());
+    }
   }
 
   CarBodyComponent get body => firstChild<CarBodyComponent>()!;
