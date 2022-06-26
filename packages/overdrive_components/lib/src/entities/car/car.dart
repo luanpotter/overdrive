@@ -66,7 +66,7 @@ class Car extends Entity with HasGameRef {
   }
 
   void verifyLeave() {
-    if (status == CarStatus.repaired) {
+    if (status == CarStatus.repaired && tires.length == 2) {
       add(DriveOutBehavior());
     }
   }
