@@ -45,6 +45,11 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
     add(ToolTable(position: (size - ToolTable.toolTableSize) / 2));
     add(TireFixerWorkbench(position: size / 2 + Vector2(10, -27)));
     add(TireFixerWorkbench(position: size / 2 - Vector2(16, -24)));
-    add(PneumaticScrewdriver(position: size / 2 + Vector2(-5, -27)));
+    add(
+      PneumaticScrewdriver(
+        position: size / 2 + Vector2(-5, -27),
+        physics: true,
+      ),
+    );
   }
 }

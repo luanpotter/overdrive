@@ -7,7 +7,7 @@ import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/items/item_type.dart';
 import 'package:overdrive_components/src/utils.dart';
 
-const _MAX_PICKUP_DISTANCE = 6.0;
+const _MAX_PICKUP_DISTANCE = 7.5;
 
 class KeyboardMovementBehavior extends Behavior<Player>
     with KeyboardHandler, HasGameRef {
@@ -95,13 +95,16 @@ class KeyboardMovementBehavior extends Behavior<Player>
       final player = parent.body.body;
       final currentHoldingItem = parent.holdingItem;
       if (currentHoldingItem != null) {
-        final entity =
-            currentHoldingItem.spawn(player.position + Vector2(2.0, 0));
+        final entity = currentHoldingItem.spawn(
+          position: player.position + Vector2(2.0, 0),
+          physics: true,
+        );
         parent.gameRef.add(entity);
         parent.holdingItem = null;
       } else {
         final closestItem = parent.gameRef.children
             .whereType<ItemEntity>()
+            .where((item) => item.realPosition != null)
             .map((item) => Pair(item, _computePickupDistance(player, item)))
             .minOrNullBy((pair) => pair.value);
         if (closestItem != null && closestItem.value <= _MAX_PICKUP_DISTANCE) {
@@ -114,7 +117,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
   }
 
   static double _computePickupDistance(Body player, ItemEntity item) {
-    return item.realPosition.distanceTo(player.position);
+    return item.realPosition!.distanceTo(player.position);
   }
 
   @override

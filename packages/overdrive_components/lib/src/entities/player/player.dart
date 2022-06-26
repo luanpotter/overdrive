@@ -8,8 +8,26 @@ import 'player_body_component.dart';
 
 class Player extends Entity with HasGameRef {
   static final playerSize = PlayerBodyComponent.size;
+  static final _heldItemOffset = Vector2(2, 2);
 
-  ItemType? holdingItem;
+  ItemType? _holdingItem;
+
+  ItemType? get holdingItem => _holdingItem;
+
+  void set holdingItem(ItemType? value) {
+    if (_holdingItem != value) {
+      _holdingItem = value;
+
+      final current = body.firstChild<ItemEntity>();
+      if (current != null) {
+        body.remove(current);
+      }
+
+      if (value != null) {
+        body.add(value.spawn(position: _heldItemOffset, physics: false));
+      }
+    }
+  }
 
   Player._({
     required Vector2 position,
