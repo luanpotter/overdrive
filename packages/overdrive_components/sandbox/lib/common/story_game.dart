@@ -17,7 +17,7 @@ class StoryGame extends Forge2DGame with HasKeyboardHandlerComponents {
   final bool center;
 
   @override
-  Color backgroundColor() => Color(0xFFFFFFFF);
+  Color backgroundColor() => const Color(0xFFFFFFFF);
 
   @override
   Future<void> onLoad() async {

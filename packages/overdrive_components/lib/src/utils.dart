@@ -1,27 +1,27 @@
 import 'package:flame/extensions.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 
-// TODO: ideas to extract to dartlin!
+// TODO(luan): ideas to extract to dartlin!
 
 extension IterableExtensions<T> on Iterable<T> {
-  T? minOrNullBy<R extends Comparable>(R Function(T) mapper) {
+  T? minOrNullBy<R extends Comparable<R>>(R Function(T) mapper) {
     return _extremeOrNullBy(mapper, (it) => it < 1);
   }
 
-  T? maxOrNullBy<R extends Comparable>(R Function(T) mapper) {
+  T? maxOrNullBy<R extends Comparable<R>>(R Function(T) mapper) {
     return _extremeOrNullBy(mapper, (it) => it > 1);
   }
 
-  T? _extremeOrNullBy<R extends Comparable>(
+  T? _extremeOrNullBy<R extends Comparable<R>>(
     R Function(T) mapper,
     bool Function(int) comparison,
   ) {
     if (isEmpty) {
       return null;
     }
-    var minElement = this.first;
+    var minElement = first;
     var minValue = mapper(minElement);
-    for (final el in this.skip(1)) {
+    for (final el in skip(1)) {
       final value = mapper(el);
       if (comparison(value.compareTo(minValue))) {
         minValue = value;
@@ -32,7 +32,7 @@ extension IterableExtensions<T> on Iterable<T> {
   }
 }
 
-extension ComparableIterableExtensions<T extends Comparable> on Iterable<T> {
+extension ComparableIterableExtensions<T extends Comparable<T>> on Iterable<T> {
   T? minOrNull() {
     return minOrNullBy((it) => it);
   }
@@ -60,7 +60,7 @@ extension ZipWithNext<T> on List<T> {
       results.add(mapper(t1, t2));
     }
     if (loopAround) {
-      results.add(mapper(this.last, this.first));
+      results.add(mapper(last, first));
     }
     return results;
   }

@@ -1,15 +1,11 @@
-import 'package:flame/components.dart';
-import 'package:overdrive_components/overdrive_components.dart';
-
 import 'package:dartlin/dartlin.dart';
 import 'package:flame/components.dart';
-import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
-import 'package:overdrive_components/src/utils.dart';
-
-import '../../entities.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
-
-import 'behaviors.dart';
+import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
+import 'package:overdrive_components/overdrive_components.dart';
+import 'package:overdrive_components/src/entities/entities.dart';
+import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
+import 'package:overdrive_components/src/utils.dart';
 
 class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
   double pickCooldown = 0.0;
@@ -22,11 +18,11 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
     final currentHoldingItem = parent.holdingItem;
     if (currentHoldingItem != null) {
       final closestToolTable = findThings<ToolTable>(
-        mapCallBack: (player, item) => _computeToolTableDistance(player, item),
+        mapCallBack: _computeToolTableDistance,
       );
 
       if (closestToolTable != null &&
-          closestToolTable.value <= MIN_DROP_DISTANCE) {
+          closestToolTable.value <= minDropDistance) {
         closestToolTable.key.holdingItem = currentHoldingItem;
       } else {
         final entity = currentHoldingItem.spawn(
@@ -41,21 +37,21 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
     } else {
       final closestItem = findThings<ItemEntity>(
         whereCallback: (item) => item.realPosition != null,
-        mapCallBack: (player, item) => _computePickupDistance(player, item),
+        mapCallBack: _computePickupDistance,
       );
 
-      if (closestItem != null && closestItem.value <= MAX_PICKUP_DISTANCE) {
+      if (closestItem != null && closestItem.value <= maxPickupDistance) {
         parent.holdingItem = closestItem.key.itemType;
         parent.gameRef.remove(closestItem.key);
         pickCooldown = 0.25;
       }
 
       final closestToolTable = findThings<ToolTable>(
-        mapCallBack: (player, item) => _computeToolTableDistance(player, item),
+        mapCallBack: _computeToolTableDistance,
       );
 
       if (closestToolTable != null &&
-          closestToolTable.value <= MAX_PICKUP_DISTANCE &&
+          closestToolTable.value <= maxPickupDistance &&
           closestToolTable.key.holdingItem != null) {
         parent.holdingItem = closestToolTable.key.holdingItem;
         closestToolTable.key.holdingItem = null;
@@ -74,14 +70,14 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
   }
 
   Pair<T, double>? findThings<T>({
-    required MapCallback mapCallBack,
+    required MapCallback<T> mapCallBack,
     WhereCallback<T>? whereCallback,
   }) =>
       parent.gameRef.children
           .whereType<T>()
           .where(whereCallback ?? (_) => true)
           .map((item) => Pair(item, mapCallBack(player, item)))
-          .minOrNullBy((p0) => p0.value);
+          .minOrNullBy<num>((p0) => p0.value);
 
   @override
   void update(double dt) {

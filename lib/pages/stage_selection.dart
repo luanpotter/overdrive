@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:overdrive/components/header.dart';
 
 class StageSelection extends StatelessWidget {
+  const StageSelection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +29,7 @@ class StageSelection extends StatelessWidget {
                         onTap: () => Navigator.of(context).pushNamed('/game'),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0XFF9575cd),
+                            color: const Color(0XFF9575cd),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: const Center(
@@ -44,7 +46,7 @@ class StageSelection extends StatelessWidget {
                       for (int i = 2; i <= 20; i++)
                         Container(
                           decoration: BoxDecoration(
-                            color: Color(0XFF55018C),
+                            color: const Color(0XFF55018C),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: const Center(

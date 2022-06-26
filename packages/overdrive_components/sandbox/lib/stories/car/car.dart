@@ -16,16 +16,15 @@ void addCarStories(Dashbook dashbook) {
         ],
       );
 
-      final position = Vector2(1280, 720 / 2);
       final behaviors = [DriveInBehavior()];
       final Car car;
 
       switch (status) {
         case CarStatus.damaged:
-          car = Car.damaged(position: position, behaviors: behaviors);
+          car = Car.damaged(lane: 0, behaviors: behaviors);
           break;
         case CarStatus.repaired:
-          car = Car.repaired(position: position, behaviors: behaviors);
+          car = Car.repaired(lane: 0, behaviors: behaviors);
       }
 
       return GameWidget(game: StoryGame(center: false, car));
@@ -42,16 +41,15 @@ void addCarStories(Dashbook dashbook) {
         ],
       );
 
-      final position = Vector2(1280 / 2, 720 / 2);
       final behaviors = [DriveOutBehavior()];
       final Car car;
 
       switch (status) {
         case CarStatus.damaged:
-          car = Car.damaged(position: position, behaviors: behaviors);
+          car = Car.damaged(lane: 0, behaviors: behaviors);
           break;
         case CarStatus.repaired:
-          car = Car.repaired(position: position, behaviors: behaviors);
+          car = Car.repaired(lane: 0, behaviors: behaviors);
       }
 
       return GameWidget(game: StoryGame(center: false, car));

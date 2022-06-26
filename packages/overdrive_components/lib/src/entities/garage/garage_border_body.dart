@@ -1,8 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:overdrive_components/src/entities/garage/garage.dart';
 import 'package:overdrive_components/src/utils.dart';
-
-import 'garage.dart';
 
 class GarageBorderBody extends BodyComponent with ParentIsA<Garage> {
   final Vector2 position;

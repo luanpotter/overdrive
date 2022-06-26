@@ -1,17 +1,15 @@
-import 'package:dartlin/dartlin.dart';
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
 import 'package:flutter/services.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
-import 'package:overdrive_components/src/entities/player/behaviors/item_picker_behavior.dart';
 
-const MAX_PICKUP_DISTANCE = 7.5;
-const MIN_DROP_DISTANCE = 10.5;
+const maxPickupDistance = 7.5;
+const minDropDistance = 10.5;
 
-typedef double MapCallback<T>(Body player, T item);
-typedef bool WhereCallback<T>(T item);
+typedef MapCallback<T> = double Function(Body player, T item);
+typedef WhereCallback<T> = bool Function(T item);
 
 class KeyboardMovementBehavior extends Behavior<Player>
     with KeyboardHandler, HasGameRef {
@@ -52,7 +50,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
   /// The speed at which the player moves.
   double baseImpulse;
 
-  Vector2 _movement = Vector2.zero();
+  final _movement = Vector2.zero();
 
   int _runFactor = 1;
 

@@ -16,11 +16,8 @@ class Car extends Entity with HasGameRef {
   Car._({
     required this.lane,
     required this.status,
-    Iterable<Behavior>? behaviors,
-  }) : super(
-          size: carSize,
-          behaviors: behaviors,
-        );
+    super.behaviors,
+  }) : super(size: carSize);
 
   Car.damaged({required int lane, Iterable<Behavior>? behaviors})
       : this._(

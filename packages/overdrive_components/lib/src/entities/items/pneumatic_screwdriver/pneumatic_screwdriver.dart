@@ -1,8 +1,7 @@
 import 'package:flame/components.dart';
-
-import '../item_type.dart';
-import 'pneumatic_screwdriver_body_component.dart';
-import 'pneumatic_screwdriver_sprite.dart';
+import 'package:overdrive_components/src/entities/items/item_type.dart';
+import 'package:overdrive_components/src/entities/items/pneumatic_screwdriver/pneumatic_screwdriver_body_component.dart';
+import 'package:overdrive_components/src/entities/items/pneumatic_screwdriver/pneumatic_screwdriver_sprite.dart';
 
 class PneumaticScrewdriver extends ItemEntity {
   PneumaticScrewdriver({

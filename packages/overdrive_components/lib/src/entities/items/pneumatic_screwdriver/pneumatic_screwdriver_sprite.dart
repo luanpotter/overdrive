@@ -18,7 +18,9 @@ class PneumaticScrewdriverSprite extends SpriteComponent
   @override
   void update(double dt) {
     final body = parent.body;
-    if (body == null) return;
+    if (body == null) {
+      return;
+    }
 
     position = body.body.position;
   }

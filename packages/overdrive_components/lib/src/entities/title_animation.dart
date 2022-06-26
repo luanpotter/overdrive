@@ -28,7 +28,7 @@ class _RunningChar extends PositionComponent with ParentIsA<TitleAnimation> {
     );
 
     const gap = 50;
-    double charX = 0;
+    var charX = 0.0;
     if (runningAway) {
       wheel.flipHorizontally();
       char.flipHorizontally();
@@ -39,10 +39,13 @@ class _RunningChar extends PositionComponent with ParentIsA<TitleAnimation> {
 
     char.x = charX;
     char.add(
-      SequenceEffect([
-        MoveEffect.to(Vector2(charX, 10), LinearEffectController(.2)),
-        MoveEffect.to(Vector2(charX, 0), LinearEffectController(.2)),
-      ], infinite: true),
+      SequenceEffect(
+        [
+          MoveEffect.to(Vector2(charX, 10), LinearEffectController(.2)),
+          MoveEffect.to(Vector2(charX, 0), LinearEffectController(.2)),
+        ],
+        infinite: true,
+      ),
     );
 
     position = runningAway
@@ -61,11 +64,10 @@ class _RunningChar extends PositionComponent with ParentIsA<TitleAnimation> {
 
     final effect = MoveEffect.to(destination, LinearEffectController(2))
       ..onComplete = () {
-        Future<void>.delayed(Duration(seconds: 2)).then((_) {
+        Future<void>.delayed(const Duration(seconds: 2)).then((_) {
           removeFromParent();
           parent.add(_RunningChar(runningAway: !runningAway));
         });
-        ;
       };
 
     addAll([char, wheel, effect]);

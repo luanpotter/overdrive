@@ -1,10 +1,9 @@
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/material.dart';
+import 'package:overdrive_components/src/entities/car/car.dart';
 import 'package:overdrive_components/src/entities/car/car_body_component.dart';
-
-import '../../car/car.dart';
-import 'tire_body_component.dart';
+import 'package:overdrive_components/src/entities/items/tire/tire_body_component.dart';
 
 enum TireStatus {
   normal(),
@@ -64,6 +63,6 @@ class Tire extends Entity {
 
   Car? get car => (parent as CarBodyComponent?)?.parent;
 
-  static final tireRadius = 2.0;
+  static const tireRadius = 2.0;
   static final tireSize = Vector2.all(2 * tireRadius);
 }
