@@ -91,7 +91,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
       _runFactor = 1;
     }
 
-    final tireRemover = parent.findBehavior<TireRemoverBehavior>();
+    final tireRemover = parent.findBehavior<TireScrewerBehavior>();
     if (keysPressed.contains(useKey)) {
       if (parent.holdingItem == ItemType.screwdriver) {
         tireRemover.start();
