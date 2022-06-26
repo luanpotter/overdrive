@@ -105,11 +105,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
     }
 
     return super.onKeyEvent(event, keysPressed);
-  }
-  
-  static double _computeTireFixerWorkbench(Body player, TireFixerWorkbench item) {
-    return item.body.body.position.distanceTo(player.position);
-  }
+  }  
 
   @override
   void update(double dt) {
