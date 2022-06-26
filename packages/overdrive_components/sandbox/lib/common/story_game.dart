@@ -1,7 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/extensions.dart';
-import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 
@@ -12,7 +11,6 @@ class StoryGame extends Forge2DGame with HasKeyboardHandlerComponents {
   }) {
     // Clearing the prefix allows us to load images from packages.
     images.prefix = '';
-    Flame.images.prefix = '';
   }
 
   final PositionComponent component;

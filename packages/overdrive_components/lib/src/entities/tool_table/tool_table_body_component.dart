@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:overdrive_components/gen/assets.gen.dart';
 import 'package:overdrive_components/src/utils.dart';
 
 import 'tool_table.dart';
@@ -19,7 +20,7 @@ class ToolTableBodyComponent extends BodyComponent with ParentIsA<ToolTable> {
   Future<void> onLoad() async {
     await super.onLoad();
 
-    sprite = await Sprite.load('toolbox.png');
+    sprite = await Sprite.load(Assets.images.toolbox.keyName);
   }
 
   @override
