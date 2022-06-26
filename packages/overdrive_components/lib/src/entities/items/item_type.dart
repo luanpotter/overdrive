@@ -14,6 +14,7 @@ abstract class ItemEntity extends Entity {
 enum ItemType {
   screwdriver,
   demageTire,
+  normalTire,
 }
 
 extension ItemTypeMethods on ItemType {
@@ -26,6 +27,11 @@ extension ItemTypeMethods on ItemType {
         return PneumaticScrewdriver(position: position, physics: physics);
       case ItemType.demageTire:
         return Tire.damaged(
+          position: position,
+          physics: physics,
+        );
+      case ItemType.normalTire:
+        return Tire.normal(
           position: position,
           physics: physics,
         );

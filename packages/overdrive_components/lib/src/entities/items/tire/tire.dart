@@ -61,15 +61,15 @@ class Tire extends ItemEntity {
         );
 
   Car? get car => (parent as CarBodyComponent?)?.parent;
-  
-  TireBodyComponent? get body =>
-      firstChild<TireBodyComponent>();
+
+  TireBodyComponent? get body => firstChild<TireBodyComponent>();
 
   static const tireRadius = 2.0;
   static final tireSize = Vector2.all(2 * tireRadius);
 
   @override
-  ItemType get itemType => ItemType.demageTire;
+  ItemType get itemType =>
+      status == TireStatus.normal ? ItemType.normalTire : ItemType.demageTire;
 
   @override
   Vector2? get realPosition => body?.body.position;
