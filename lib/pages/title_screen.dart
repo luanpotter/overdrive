@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class TitleScreen extends StatelessWidget {
   @override
@@ -23,21 +20,21 @@ class TitleScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               ElevatedButton(
-                child: Text('Play'),
+                child: const Text('Play'),
                 onPressed: () => Navigator.of(context).pushNamed('/game'),
               ),
               const SizedBox(
                 height: 16,
               ),
               ElevatedButton(
-                child: Text('Settings'),
+                child: const Text('Settings'),
                 onPressed: () => {},
               ),
               const SizedBox(
                 height: 16,
               ),
               ElevatedButton(
-                child: Text('Credits'),
+                child: const Text('Credits'),
                 onPressed: () => {},
               ),
             ],
