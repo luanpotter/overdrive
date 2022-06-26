@@ -12,14 +12,27 @@ class PlayerBodyComponent extends BodyComponent with ParentIsA<Player> {
 
   late final Sprite sprite;
   final Vector2 startPosition;
+  final CharacterType character;
 
-  PlayerBodyComponent(this.startPosition);
+  PlayerBodyComponent(
+    this.startPosition,
+    this.character,
+  );
+
+  Map<CharacterType, String> get characterTypes => {
+        CharacterType.female_1: Assets.images.characters.female1.keyName,
+        CharacterType.female_2: Assets.images.characters.female2.keyName,
+        CharacterType.female_3: Assets.images.characters.female3.keyName,
+        CharacterType.male_1: Assets.images.characters.male1.keyName,
+        CharacterType.male_2: Assets.images.characters.male2.keyName,
+        CharacterType.male_3: Assets.images.characters.male3.keyName,
+      };
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
-    sprite = await Sprite.load(Assets.images.player.keyName);
+    sprite = await Sprite.load(characterTypes[character]!);
   }
 
   @override

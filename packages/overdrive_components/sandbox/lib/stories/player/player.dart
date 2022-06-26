@@ -9,13 +9,23 @@ void addPlayerStories(Dashbook dashbook) {
       .add(
         'WASD',
         (_) => GameWidget(
-          game: StoryGame(Player.wasd(position: Vector2.zero())),
+          game: StoryGame(
+            Player.wasd(
+              position: Vector2.zero(),
+              character: CharacterType.female_1,
+            ),
+          ),
         ),
       )
       .add(
         'Arrows',
         (_) => GameWidget(
-          game: StoryGame(Player.arrows(position: Vector2.zero())),
+          game: StoryGame(
+            Player.arrows(
+              position: Vector2.zero(),
+              character: CharacterType.female_1,
+            ),
+          ),
         ),
       );
 }

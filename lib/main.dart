@@ -22,7 +22,20 @@ void main() {
         '/': (context) => const TitleScreen(),
         '/stages': (context) => const StageSelection(),
         '/character_selection': (context) => const CharacterSelection(),
-        '/game': (context) => GameWidget(game: OverdriveGame()),
+        '/game': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments
+              as Map<String, CharacterType>?;
+
+          final player1 = args?['player1'] ?? CharacterType.female_1;
+          final player2 = args?['player2'];
+
+          return GameWidget(
+            game: OverdriveGame(
+              characterPlayer1: player1,
+              characterPlayer2: player2,
+            ),
+          );
+        },
         '/credits': (context) => const CreditsScreen(),
       },
     ),
@@ -79,8 +92,13 @@ ThemeData get overdriveTheme {
 }
 
 class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
-  OverdriveGame()
-      : super(
+  final CharacterType characterPlayer1;
+  final CharacterType? characterPlayer2;
+
+  OverdriveGame({
+    required this.characterPlayer1,
+    this.characterPlayer2,
+  }) : super(
           gravity: Vector2.zero(),
           camera: createCamera(),
         );
@@ -97,8 +115,21 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
 
     add(Garage());
     add(
-      Player.wasd(position: size / 2 - Vector2(10, Player.playerSize.y / 2)),
+      Player.wasd(
+        position: size / 2 - Vector2(10, Player.playerSize.y / 2),
+        character: characterPlayer1,
+      ),
     );
+
+    if (characterPlayer2 != CharacterType.empty) {
+      add(
+        Player.arrows(
+          position: size / 2 - Vector2(15, Player.playerSize.y / 2),
+          character: characterPlayer2!,
+        ),
+      );
+    }
+
     add(ToolTable(position: (size - ToolTable.toolTableSize) / 2));
     add(
       TireFixerWorkbench(

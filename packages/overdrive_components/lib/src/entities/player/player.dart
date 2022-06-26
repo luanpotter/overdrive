@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/services.dart';
-import 'package:overdrive_components/src/entities/items/item_type.dart';
+import 'package:overdrive_components/overdrive_components.dart';
 import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
 import 'package:overdrive_components/src/entities/player/player_body_component.dart';
 
@@ -10,6 +10,7 @@ export 'character_type.dart';
 class Player extends Entity with HasGameRef {
   static final playerSize = PlayerBodyComponent.size;
   static final _heldItemOffset = Vector2(2, 2);
+  final CharacterType character;
 
   ItemType? _holdingItem;
 
@@ -33,9 +34,10 @@ class Player extends Entity with HasGameRef {
   Player._({
     required Vector2 position,
     required Iterable<Behavior> behaviors,
+    required this.character,
   }) : super(
           children: [
-            PlayerBodyComponent(position),
+            PlayerBodyComponent(position, character),
           ],
           behaviors: behaviors.toList() +
               [ItemPickerBehavior(), TireRemoverBehavior()],
@@ -50,6 +52,7 @@ class Player extends Entity with HasGameRef {
     required LogicalKeyboardKey pickKey,
     required LogicalKeyboardKey runKey,
     required LogicalKeyboardKey useKey,
+    required CharacterType character,
   }) : this._(
           position: position,
           behaviors: [
@@ -63,10 +66,12 @@ class Player extends Entity with HasGameRef {
               useKey: useKey,
             ),
           ],
+          character: character,
         );
 
   Player.wasd({
     required Vector2 position,
+    required CharacterType character,
   }) : this._withKeys(
           position: position,
           leftKey: LogicalKeyboardKey.keyA,
@@ -76,10 +81,12 @@ class Player extends Entity with HasGameRef {
           runKey: LogicalKeyboardKey.keyH,
           useKey: LogicalKeyboardKey.keyT,
           pickKey: LogicalKeyboardKey.keyG,
+          character: character,
         );
 
   Player.arrows({
     required Vector2 position,
+    required CharacterType character,
   }) : this._withKeys(
           position: position,
           leftKey: LogicalKeyboardKey.arrowLeft,
@@ -89,6 +96,7 @@ class Player extends Entity with HasGameRef {
           runKey: LogicalKeyboardKey.keyK,
           useKey: LogicalKeyboardKey.semicolon,
           pickKey: LogicalKeyboardKey.keyL,
+          character: character,
         );
 
   PlayerBodyComponent get body => firstChild<PlayerBodyComponent>()!;
