@@ -136,8 +136,6 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
       );
     }
 
-    add(ToolTable(startPosition: (size - ToolTable.toolTableSize) / 2));
-
     add(
       TireFixerWorkbench(
         position: Vector2(
@@ -157,6 +155,7 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
 
     // init screwdriver on toolTable;
     toolTable.holdingItem = ItemType.screwdriver;
+    
     spawnCar();
   }
 

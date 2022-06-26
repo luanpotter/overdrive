@@ -33,7 +33,7 @@ class ToolTable extends Entity {
 
   @override
   Future<void> onLoad() async {
-    add(body = ToolTableBodyComponent(startPosition));
+    await add(body = ToolTableBodyComponent(startPosition));
   }
 
   ToolTable({required this.startPosition});
