@@ -1,6 +1,7 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:overdrive_components/gen/assets.gen.dart';
-import 'dart:math';
 
 final _carColors = <String>[
   Assets.images.car.carFrontBlue.keyName,
@@ -10,28 +11,12 @@ final _carColors = <String>[
   Assets.images.car.carFrontCyan.keyName,
 ];
 
-class CarSpriteComposite extends PositionComponent {
-  static Vector2 get spriteSize => Vector2(6.25, 2.77) * 3;
-
-  final List<Component> childrenInBetween;
-  final CarSprite carSprite;
-
-  CarSpriteComposite({
-    required this.childrenInBetween,
-    required this.carSprite,
-    Vector2? position,
-  }) : super(position: position);
-
-  Future<void> onLoad() async {
-    await add(CarSpriteBackground());
-    // tires go here
-    await addAll(childrenInBetween);
-    await add(carSprite);
-  }
-}
-
 class CarSprite extends SpriteComponent {
-  static Vector2 get spriteSize => CarSpriteComposite.spriteSize;
+  static Vector2 get spriteSize => Vector2(6.25, 2.77) * 4;
+
+  static Vector2 get frontTirePosition => Vector2(17.6, 8.5);
+
+  static Vector2 get backTirePosition => Vector2(4.7, 8.5);
 
   factory CarSprite.anyColor() {
     final random = Random();
@@ -55,7 +40,7 @@ class CarSprite extends SpriteComponent {
 }
 
 class CarSpriteBackground extends SpriteComponent {
-  static Vector2 get spriteSize => CarSpriteComposite.spriteSize;
+  static Vector2 get spriteSize => CarSprite.spriteSize;
 
   CarSpriteBackground();
 

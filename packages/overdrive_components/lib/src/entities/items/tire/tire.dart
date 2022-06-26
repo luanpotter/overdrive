@@ -1,11 +1,10 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:overdrive_components/src/entities/car/car.dart';
 import 'package:overdrive_components/src/entities/car/car_body_component.dart';
-import 'package:overdrive_components/src/entities/items/tire/tire_body_component.dart';
-
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/items/tire/tire_body_component.dart';
+
+export './tire_sprite.dart';
 
 enum TireStatus {
   normal(),
@@ -40,9 +39,11 @@ class Tire extends ItemEntity {
     required bool physics,
   }) : super(
           children: [
-            CircleComponent.relative(1, parentSize: tireSize)
-              ..paint = status.toPaint(),
             if (physics) TireBodyComponent(startPosition: position),
+            if (status == TireStatus.normal)
+              TireSprite.repaired(position)
+            else
+              TireSprite.damaged(position)
           ],
         );
 

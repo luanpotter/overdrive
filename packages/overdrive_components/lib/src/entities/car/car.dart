@@ -12,13 +12,11 @@ enum CarStatus {
 }
 
 class Car extends Entity with HasGameRef {
-  static final carSize = Vector2(7.5, 3) * 3;
-
   Car._({
     required this.lane,
     required this.status,
     super.behaviors,
-  }) : super(size: carSize);
+  }) : super(size: CarSprite.spriteSize);
 
   Car.damaged({required int lane, Iterable<Behavior>? behaviors})
       : this._(
@@ -40,10 +38,10 @@ class Car extends Entity with HasGameRef {
 
   Vector2 _computeStartPosition() {
     return Vector2(
-          -Car.carSize.x,
+          -CarSprite.spriteSize.x,
           (1.5 + 2 * lane) * gameRef.size.y / 5,
         ) -
-        carSize / 2;
+        CarSprite.spriteSize / 2;
   }
 
   @override

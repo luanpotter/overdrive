@@ -1,5 +1,4 @@
 export 'car/car.dart';
-export 'car_sprite/car_sprite.dart';
 export 'garage/garage.dart';
 export 'player/player.dart';
 export 'pneumatic_screwdriver/pneumatic_screwdriver.dart';
