@@ -207,7 +207,7 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                             ),
                           ),
                           const Text(
-                            'Use tools: T',
+                            'Use tools: T (keep pressed to activate)',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.black,
@@ -243,7 +243,7 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                               ),
                             ),
                             const Text(
-                              'Use tools: ;',
+                              'Use tools: ; (keep pressed to activate)',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
