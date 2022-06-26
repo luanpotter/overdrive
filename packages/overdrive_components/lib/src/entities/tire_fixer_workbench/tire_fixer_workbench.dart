@@ -3,6 +3,7 @@ import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/tire_fixer_workbench/tire_fixer_workbench_body_component.dart';
 
+export 'behaviors/behavrios.dart';
 class TireFixerWorkbench extends Entity {
   static final tireFixerWorkbenchSize = TireFixerWorkbenchBodyComponent.size;
   static final _fixingItemOffset = Vector2(4, 0);
@@ -27,10 +28,12 @@ class TireFixerWorkbench extends Entity {
 
   TireFixerWorkbench({
     required Vector2 position,
+    required Iterable<Behavior> behaviors,
   }) : super(
           children: [
             TireFixerWorkbenchBodyComponent(startPosition: position),
           ],
+          behaviors: behaviors,
         );
 
   TireFixerWorkbenchBodyComponent get body =>
