@@ -14,6 +14,8 @@ typedef bool WhereCallback<T>(T item);
 
 class KeyboardMovementBehavior extends Behavior<Player>
     with KeyboardHandler, HasGameRef {
+  double pickCooldown = 0.0;
+
   KeyboardMovementBehavior({
     required this.upKey,
     required this.downKey,
@@ -115,7 +117,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
       }
     }
 
-    if (keysPressed.contains(pickKey)) {
+    if (keysPressed.contains(pickKey) && pickCooldown == 0.0) {
       final player = parent.body.body;
       final currentHoldingItem = parent.holdingItem;
       if (currentHoldingItem != null) {
@@ -136,6 +138,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
           parent.gameRef.add(entity);
         }
 
+        pickCooldown = 0.25;
         parent.holdingItem = null;
       } else {
         final closestItem = findThings<ItemEntity>(
@@ -147,6 +150,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
         if (closestItem != null && closestItem.value <= _MAX_PICKUP_DISTANCE) {
           parent.holdingItem = closestItem.key.itemType;
           parent.gameRef.remove(closestItem.key);
+          pickCooldown = 0.25;
         }
 
         final closestToolTable = findThings<ToolTable>(
@@ -160,6 +164,7 @@ class KeyboardMovementBehavior extends Behavior<Player>
             closestToolTable.key.holdingItem != null) {
           parent.holdingItem = closestToolTable.key.holdingItem;
           closestToolTable.key.holdingItem = null;
+          pickCooldown = 0.25;
         }
       }
     }
@@ -194,6 +199,13 @@ class KeyboardMovementBehavior extends Behavior<Player>
 
   @override
   void update(double dt) {
+    if (pickCooldown > 0.0) {
+      pickCooldown -= dt;
+      if (pickCooldown < 0.0) {
+        pickCooldown = 0.0;
+      }
+    }
+
     final acc = _movement * (baseImpulse * _runFactor * dt);
     parent.body.body.applyLinearImpulse(acc);
 
