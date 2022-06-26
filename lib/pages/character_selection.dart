@@ -4,13 +4,15 @@ import 'package:overdrive_components/gen/assets.gen.dart';
 import 'package:overdrive_components/overdrive_components.dart';
 
 class CharacterSelection extends StatefulWidget {
+  const CharacterSelection({super.key});
+
   @override
   State<CharacterSelection> createState() => _CharacterSelectionState();
 }
 
 class _CharacterSelectionState extends State<CharacterSelection> {
-  late CharacterType player1 = CharacterType.FEMALE1;
-  late CharacterType player2 = CharacterType.EMPTY;
+  late CharacterType player1 = CharacterType.female_1;
+  late CharacterType player2 = CharacterType.empty;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +21,14 @@ class _CharacterSelectionState extends State<CharacterSelection> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Header(
+            const Header(
               title: 'Select your character',
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
+                  const Text(
                     'Player 1',
                     style: TextStyle(
                       fontFamily: 'Monoton',
@@ -34,7 +36,7 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -52,14 +54,13 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                           (char) => Padding(
                             padding: const EdgeInsets.only(right: 10.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Image.asset(
                                   char.value,
                                   width: 100,
                                   height: 70,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 4,
                                 ),
                                 Radio(
@@ -67,7 +68,7 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                                   groupValue: player1,
                                   onChanged: (value) {
                                     setState(
-                                      () => player1 = value as CharacterType,
+                                      () => player1 = value! as CharacterType,
                                     );
                                   },
                                 ),
@@ -78,10 +79,10 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
-                  Text(
+                  const Text(
                     'Player 2',
                     style: TextStyle(
                       fontFamily: 'Monoton',
@@ -89,7 +90,7 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -106,21 +107,20 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                         Padding(
                           padding: const EdgeInsets.only(right: 20.0),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.close,
                                 size: 70,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 4,
                               ),
                               Radio(
-                                value: CharacterType.EMPTY,
+                                value: CharacterType.empty,
                                 groupValue: player2,
                                 onChanged: (value) {
                                   setState(
-                                    () => player2 = value as CharacterType,
+                                    () => player2 = value! as CharacterType,
                                   );
                                 },
                               ),
@@ -131,14 +131,13 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                           (char) => Padding(
                             padding: const EdgeInsets.only(right: 20.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Image.asset(
                                   char.value,
                                   width: 100,
                                   height: 70,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 4,
                                 ),
                                 Radio(
@@ -146,7 +145,7 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                                   groupValue: player2,
                                   onChanged: (value) {
                                     setState(
-                                      () => player2 = value as CharacterType,
+                                      () => player2 = value! as CharacterType,
                                     );
                                   },
                                 ),
@@ -163,10 +162,10 @@ class _CharacterSelectionState extends State<CharacterSelection> {
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
               child: ElevatedButton(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
-                    'Let\'s play',
+                    "Let's play",
                     style: TextStyle(fontSize: 30),
                   ),
                 ),
@@ -187,10 +186,10 @@ class _CharacterSelectionState extends State<CharacterSelection> {
 }
 
 Map<CharacterType, String> get characterTypes => {
-      CharacterType.FEMALE1: Assets.images.characters.female1.keyName,
-      CharacterType.FEMALE2: Assets.images.characters.female2.keyName,
-      CharacterType.FEMALE3: Assets.images.characters.female3.keyName,
-      CharacterType.MALE1: Assets.images.characters.male1.keyName,
-      CharacterType.MALE2: Assets.images.characters.male2.keyName,
-      CharacterType.MALE3: Assets.images.characters.male3.keyName,
+      CharacterType.female_1: Assets.images.characters.female1.keyName,
+      CharacterType.female_2: Assets.images.characters.female2.keyName,
+      CharacterType.female_3: Assets.images.characters.female3.keyName,
+      CharacterType.male_1: Assets.images.characters.male1.keyName,
+      CharacterType.male_2: Assets.images.characters.male2.keyName,
+      CharacterType.male_3: Assets.images.characters.male3.keyName,
     };

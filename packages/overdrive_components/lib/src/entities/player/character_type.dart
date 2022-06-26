@@ -1,9 +1,9 @@
 enum CharacterType {
-  EMPTY,
-  FEMALE1,
-  FEMALE2,
-  FEMALE3,
-  MALE1,
-  MALE2,
-  MALE3;
+  empty,
+  female_1,
+  female_2,
+  female_3,
+  male_1,
+  male_2,
+  male_3;
 }
