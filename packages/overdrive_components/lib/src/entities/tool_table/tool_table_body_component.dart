@@ -3,9 +3,8 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:overdrive_components/gen/assets.gen.dart';
+import 'package:overdrive_components/src/entities/tool_table/tool_table.dart';
 import 'package:overdrive_components/src/utils.dart';
-
-import 'tool_table.dart';
 
 class ToolTableBodyComponent extends BodyComponent with ParentIsA<ToolTable> {
   // original size:, 576 x 478,

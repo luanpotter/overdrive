@@ -9,14 +9,13 @@ environment:
 dependencies:
   flame: 1.2.0
   flame_audio: 1.2.0
-  flame_forge2d: 0.12.0
   flame_behaviors: 0.1.1
+  flame_forge2d: 0.12.0
   flex_color_scheme: ^5.0.1
-  
-  overdrive_components:
-    path: packages/overdrive_components
   flutter:
     sdk: flutter
+  overdrive_components:
+    path: packages/overdrive_components
 
 dev_dependencies:
   flame_lint: 0.1.0

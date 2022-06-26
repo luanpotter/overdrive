@@ -3,9 +3,8 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:overdrive_components/gen/assets.gen.dart';
+import 'package:overdrive_components/src/entities/player/player.dart';
 import 'package:overdrive_components/src/utils.dart';
-
-import 'player.dart';
 
 class PlayerBodyComponent extends BodyComponent with ParentIsA<Player> {
   // original sprite size: 468 x 613

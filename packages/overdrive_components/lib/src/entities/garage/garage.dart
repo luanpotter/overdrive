@@ -1,8 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:overdrive_components/overdrive_components.dart';
-
-import 'garage_border_body.dart';
+import 'package:overdrive_components/src/entities/garage/garage_border_body.dart';
 
 class Garage extends Entity with HasGameRef {
   @override

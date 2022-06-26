@@ -1,8 +1,8 @@
 import 'package:flame/components.dart';
+import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
 import 'package:overdrive_components/gen/assets.gen.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
-import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:overdrive_components/src/utils.dart';
 
 class TireFixerWorkbenchBodyComponent extends BodyComponent

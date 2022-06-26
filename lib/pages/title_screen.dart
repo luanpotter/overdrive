@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:overdrive_components/overdrive_components.dart';
 
 class TitleScreen extends StatelessWidget {
+  const TitleScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +16,7 @@ class TitleScreen extends StatelessWidget {
               height: 320,
               width: 500,
               decoration: BoxDecoration(
-                color: Color(0xffC2D0E8),
+                color: const Color(0xffC2D0E8),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Padding(

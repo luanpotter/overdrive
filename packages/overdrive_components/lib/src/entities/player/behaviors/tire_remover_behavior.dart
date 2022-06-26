@@ -1,23 +1,21 @@
 import 'package:dartlin/dartlin.dart';
 import 'package:flame/components.dart';
+import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
+import 'package:overdrive_components/src/entities/entities.dart';
+import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
 import 'package:overdrive_components/src/utils.dart';
 
-import '../../entities.dart';
-import 'package:flame_behaviors/flame_behaviors.dart';
-
-import 'behaviors.dart';
-
 class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
-  Tire? _tire = null;
+  Tire? _tire;
   double _cooldown = 0.0;
 
   Body get player => parent.body.body;
 
-  bool get isRemoving => _tire != null;
+  bool get isRemovingTire => _tire != null;
 
   void start() {
-    if (isRemoving) {
+    if (isRemovingTire) {
       return;
     }
 
@@ -25,8 +23,8 @@ class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
         .whereType<Car>()
         .expand((car) => car.tires)
         .map((tire) => Pair(tire, _computeDistanceToTire(tire)))
-        .minOrNullBy((pair) => pair.value);
-    if (closestTire != null && closestTire.value <= MIN_DROP_DISTANCE) {
+        .minOrNullBy<num>((pair) => pair.value);
+    if (closestTire != null && closestTire.value <= minDropDistance) {
       final tire = closestTire.key;
       final car = tire.car;
       if (car != null) {
@@ -56,7 +54,7 @@ class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
     }
 
     if (parent.holdingItem != ItemType.screwdriver ||
-        _computeDistanceToTire(tire) > MIN_DROP_DISTANCE) {
+        _computeDistanceToTire(tire) > minDropDistance) {
       stop();
     }
     if (_cooldown == 0.0) {

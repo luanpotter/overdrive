@@ -18,7 +18,7 @@ class Header extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: GestureDetector(
             onTap: backActionButton,
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.white,
               size: 50,
@@ -27,7 +27,7 @@ class Header extends StatelessWidget {
         ),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Monoton',
             fontSize: 50,
             color: Colors.white,

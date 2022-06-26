@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:overdrive/components/header.dart';
 
 class CreditsScreen extends StatelessWidget {
+  const CreditsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,22 +23,22 @@ class CreditsScreen extends StatelessWidget {
                 child: SizedBox(
                   width: 800,
                   child: Column(
-                    children: [
-                      const Text('Built with love by:'),
-                      const SizedBox(
+                    children: const [
+                      Text('Built with love by:'),
+                      SizedBox(
                         height: 16,
                       ),
-                      const Text('Elias Reis'),
-                      const Text('Erick Zanardo'),
-                      const Text('Felix Angelov'),
-                      const Text('Luan Nico'),
-                      const Text('Renan Araujo'),
-                      const Text('Tyemy Kuga'),
-                      const SizedBox(
+                      Text('Elias Reis'),
+                      Text('Erick Zanardo'),
+                      Text('Felix Angelov'),
+                      Text('Luan Nico'),
+                      Text('Renan Araujo'),
+                      Text('Tyemy Kuga'),
+                      SizedBox(
                         height: 16,
                       ),
-                      const Text('For the BIG Game Jam!'),
-                      const SizedBox(
+                      Text('For the BIG Game Jam!'),
+                      SizedBox(
                         height: 16,
                       ),
                     ],

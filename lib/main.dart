@@ -1,14 +1,13 @@
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:overdrive/pages/credits_screen.dart';
 import 'package:overdrive/pages/stage_selection.dart';
 import 'package:overdrive/pages/title_screen.dart';
 import 'package:overdrive_components/overdrive_components.dart';
-import 'package:flame_forge2d/flame_forge2d.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
-
-import 'pages/credits_screen.dart';
 
 void main() {
   Flame.images.prefix = '';
@@ -17,17 +16,17 @@ void main() {
     MaterialApp(
       theme: overdriveTheme,
       routes: {
-        '/': (context) => TitleScreen(),
-        '/stages': (context) => StageSelection(),
+        '/': (context) => const TitleScreen(),
+        '/stages': (context) => const StageSelection(),
         '/game': (context) => GameWidget(game: OverdriveGame()),
-        '/credits': (context) => CreditsScreen(),
+        '/credits': (context) => const CreditsScreen(),
       },
     ),
   );
 }
 
 ThemeData get overdriveTheme {
-  ColorScheme flexSchemeDark() => ColorScheme(
+  ColorScheme flexSchemeDark() => const ColorScheme(
         brightness: Brightness.dark,
         primary: Color(0xff55018C),
         onPrimary: Color(0xfff5f6fe),
@@ -60,7 +59,7 @@ ThemeData get overdriveTheme {
 
   return FlexThemeData.light(
     scheme: FlexScheme.indigo,
-    scaffoldBackground: Color(0xff060642),
+    scaffoldBackground: const Color(0xff060642),
     colorScheme: flexSchemeDark(),
     surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
     blendLevel: 20,

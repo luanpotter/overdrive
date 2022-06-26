@@ -1,10 +1,9 @@
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/services.dart';
-
-import '../items/item_type.dart';
-import 'behaviors/behaviors.dart';
-import 'player_body_component.dart';
+import 'package:overdrive_components/src/entities/items/item_type.dart';
+import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
+import 'package:overdrive_components/src/entities/player/player_body_component.dart';
 
 class Player extends Entity with HasGameRef {
   static final playerSize = PlayerBodyComponent.size;
@@ -14,7 +13,7 @@ class Player extends Entity with HasGameRef {
 
   ItemType? get holdingItem => _holdingItem;
 
-  void set holdingItem(ItemType? value) {
+  set holdingItem(ItemType? value) {
     if (_holdingItem != value) {
       _holdingItem = value;
 
