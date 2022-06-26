@@ -2,7 +2,7 @@ import 'package:flame/components.dart';
 import 'package:overdrive_components/gen/assets.gen.dart';
 
 class CarSpot extends SpriteComponent with HasGameRef {
-  CarSpot({ required this.top });
+  CarSpot({required this.top});
 
   final bool top;
 
@@ -12,7 +12,7 @@ class CarSpot extends SpriteComponent with HasGameRef {
     width = 32.0;
     x = (gameRef.size.x - width) / 2;
     if (top) {
-    y = height;
+      y = height;
     } else {
       y = 3 * height;
     }
