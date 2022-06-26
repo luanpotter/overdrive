@@ -31,6 +31,10 @@ class $AssetsImagesGen {
   AssetGenImage get screwDriverTool =>
       const AssetGenImage('assets/images/screw-driver-tool.png');
 
+  /// File path: assets/images/tire-fixer-workbench.png
+  AssetGenImage get tireFixerWorkbench =>
+      const AssetGenImage('assets/images/tire-fixer-workbench.png');
+
   /// File path: assets/images/tire_fixer.png
   AssetGenImage get tireFixer =>
       const AssetGenImage('assets/images/tire_fixer.png');
