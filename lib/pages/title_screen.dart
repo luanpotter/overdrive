@@ -1,4 +1,6 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:overdrive_components/overdrive_components.dart';
 
 class TitleScreen extends StatelessWidget {
   @override
@@ -7,9 +9,20 @@ class TitleScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          color: Colors.red,
-          height: 350,
+          height: 320,
           width: 500,
+          decoration: BoxDecoration(
+              border: Border.all(color: Color(0xFF4A86E8), width: 10),
+              borderRadius: BorderRadius.circular(16),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ClipRect(
+              child: GameWidget(
+                game: TitleAnimationPlayer(),
+              ),
+            ),
+          ),
         ),
         const SizedBox(
           height: 24,
