@@ -25,3 +25,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: Monoton
+      fonts:
+        - asset: assets/fonts/Monoton-Regular.ttf
