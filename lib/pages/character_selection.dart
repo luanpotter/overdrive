@@ -59,6 +59,7 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                                   char.value,
                                   width: 100,
                                   height: 70,
+                                  filterQuality: FilterQuality.medium,
                                 ),
                                 const SizedBox(
                                   height: 4,
@@ -136,6 +137,7 @@ class _CharacterSelectionState extends State<CharacterSelection> {
                                   char.value,
                                   width: 100,
                                   height: 70,
+                                  filterQuality: FilterQuality.medium,
                                 ),
                                 const SizedBox(
                                   height: 4,

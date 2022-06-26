@@ -11,12 +11,15 @@ class _RunningChar extends PositionComponent with ParentIsA<TitleAnimation> {
 
   @override
   Future<void> onLoad() async {
+    final paint = Paint()..filterQuality = FilterQuality.medium..isAntiAlias = false;
+
     final char = SpriteComponent(
       sprite: parent._charSprite,
       size: Vector2(
         (parent._charSprite.image.width / parent._scale).roundToDouble(),
         (parent._charSprite.image.height / parent._scale).roundToDouble(),
       ),
+      paint: paint,
     );
 
     final wheel = SpriteComponent(
@@ -25,6 +28,7 @@ class _RunningChar extends PositionComponent with ParentIsA<TitleAnimation> {
         (parent._wheelSprite.image.width / parent._scale).roundToDouble(),
         (parent._wheelSprite.image.height / parent._scale).roundToDouble(),
       ),
+      paint: paint,
     );
 
     const gap = 50;
@@ -84,6 +88,8 @@ class TitleAnimation extends PositionComponent with HasGameRef {
 
   @override
   Future<void> onLoad() async {
+    final paint = Paint()..filterQuality = FilterQuality.medium..isAntiAlias = false;
+
     _titleSprite = await gameRef.loadSprite(
       Assets.images.titleScreen.title.keyName,
     );
@@ -106,6 +112,7 @@ class TitleAnimation extends PositionComponent with HasGameRef {
             (_titleSprite.image.height / _scale).roundToDouble(),
           ),
           position: gameRef.size / 2,
+          paint: paint,
         ),
         _RunningChar(runningAway: false),
       ],
