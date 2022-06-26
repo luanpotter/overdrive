@@ -68,6 +68,7 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
   }
 
   Body get player => parent.body.body;
+
   static double _computePickupDistance(Body player, ItemEntity item) {
     return item.realPosition!.distanceTo(player.position);
   }
@@ -77,7 +78,9 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
   }
 
   static double _computeTireFixerWorkbenchDistance(
-      Body player, TireFixerWorkbench item) {
+    Body player,
+    TireFixerWorkbench item,
+  ) {
     return item.body.body.position.distanceTo(player.position);
   }
 
