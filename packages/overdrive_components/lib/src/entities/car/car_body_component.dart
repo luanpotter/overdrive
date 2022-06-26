@@ -3,6 +3,8 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/utils.dart';
 
+import 'car_sprite.dart';
+
 class CarBodyComponent extends BodyComponent with ParentIsA<Car> {
   final Vector2 startPosition;
 
@@ -28,6 +30,8 @@ class CarBodyComponent extends BodyComponent with ParentIsA<Car> {
         add(Tire.normal(position: rightTirePosition, physics: false));
         break;
     }
+
+    await add(CarSprite.anyColor());
 
     await super.onLoad();
   }
