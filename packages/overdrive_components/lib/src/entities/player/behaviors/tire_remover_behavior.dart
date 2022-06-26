@@ -47,9 +47,7 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
       final tire = closestCarTire.key;
       final car = tire.car;
       if (car != null) {
-        FlameAudio.play(
-          'packages/overdrive_components/${Assets.sfx.screwDriver}',
-        );
+        playSound();
         _tire = tire;
         _cooldown = 2.0;
         return;
@@ -67,6 +65,7 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
         closestNonCarTire.distance <= interactDistance) {
       final tire = closestNonCarTire.tire;
       if (tire.car == null) {
+        playSound();
         final closestCar = closestNonCarTire.carSpot;
         _tire = tire;
         _cooldown = 2.0;
@@ -93,6 +92,12 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
   void stop() {
     _tire = null;
     _cooldown = 0.0;
+  }
+
+  void playSound() {
+    FlameAudio.play(
+      'packages/overdrive_components/${Assets.sfx.screwDriver}',
+    );
   }
 
   @override
