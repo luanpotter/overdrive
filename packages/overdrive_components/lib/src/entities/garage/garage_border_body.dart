@@ -20,6 +20,9 @@ class GarageBorderBody extends BodyComponent with ParentIsA<Garage> {
       ..position = position;
     final body = world.createBody(def)..userData = this;
 
+    final filter = Filter()
+      ..categoryBits = 0x0010
+      ..maskBits = 0xFF0F;
     final vertices = [
       Vector2(0, 0),
       Vector2(0, size.y),
@@ -28,8 +31,11 @@ class GarageBorderBody extends BodyComponent with ParentIsA<Garage> {
     ];
     vertices
         .zipWithNext((v1, v2) => EdgeShape()..set(v1, v2), loopAround: true)
-        .map((edge) => FixtureDef(edge)..restitution = 1.0)
-        .forEach(body.createFixture);
+        .map((edge) {
+      return FixtureDef(edge)
+        ..restitution = 1.0
+        ..filter = filter;
+    }).forEach(body.createFixture);
     return body;
   }
 }
