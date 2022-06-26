@@ -18,7 +18,7 @@ class TireBodyComponent extends BodyComponent with ParentIsA<Tire> {
     final body = world.createBody(def)..userData = this;
 
     final fixtureDef = FixtureDef(
-      CircleShape()..radius = Tire.tireRadius,
+      CircleShape()..radius = TireSprite.spriteSize.x,
     )..restitution = 1.0;
     body.createFixture(fixtureDef);
     return body;

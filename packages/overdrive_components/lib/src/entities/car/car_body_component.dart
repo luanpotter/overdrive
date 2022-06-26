@@ -3,8 +3,6 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/utils.dart';
 
-import 'package:overdrive_components/src/entities/car/car_sprite.dart';
-
 class CarBodyComponent extends BodyComponent with ParentIsA<Car> {
   final Vector2 startPosition;
 
@@ -14,20 +12,17 @@ class CarBodyComponent extends BodyComponent with ParentIsA<Car> {
 
   @override
   Future<void> onLoad() async {
-    final leftTirePosition = Vector2(Tire.tireSize.x / 2, Car.carSize.y);
-    final rightTirePosition = Vector2(
-      Car.carSize.x - (Tire.tireSize.x / 2),
-      Car.carSize.y,
-    );
+    await add(CarSpriteBackground());
+
     switch (parent.status) {
       case CarStatus.damaged:
-        add(Tire.damaged(position: leftTirePosition, physics: false));
-        add(Tire.normal(position: rightTirePosition, physics: false));
+        add(Tire.damaged(position: CarSprite.backTirePosition, physics: false));
+        add(Tire.normal(position: CarSprite.frontTirePosition, physics: false));
         break;
 
       case CarStatus.repaired:
-        add(Tire.normal(position: leftTirePosition, physics: false));
-        add(Tire.normal(position: rightTirePosition, physics: false));
+        add(Tire.normal(position: CarSprite.backTirePosition, physics: false));
+        add(Tire.normal(position: CarSprite.frontTirePosition, physics: false));
         break;
     }
 

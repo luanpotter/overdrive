@@ -1,8 +1,9 @@
 import 'package:flame/components.dart';
 
-import '../../../../gen/assets.gen.dart';
+import 'package:overdrive_components/gen/assets.gen.dart';
+import 'package:overdrive_components/overdrive_components.dart';
 
-class TireSprite extends SpriteComponent {
+class TireSprite extends SpriteComponent with ParentIsA<Tire> {
   static Vector2 get spriteSize => Vector2(4.32, 4.49) * 0.7;
 
   TireSprite.repaired(Vector2? position)
@@ -20,5 +21,15 @@ class TireSprite extends SpriteComponent {
     await super.onLoad();
     size = spriteSize;
     sprite = await Sprite.load(spriteAsset);
+  }
+
+  @override
+  void update(double dt) {
+    // final body = parent.body;
+    // if (body == null) {
+    //   return;
+    // }
+    //
+    // position = body.body.position;
   }
 }
