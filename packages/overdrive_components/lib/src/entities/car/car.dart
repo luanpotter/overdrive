@@ -40,7 +40,9 @@ class Car extends Entity with HasGameRef {
   CarStatus get status {
     final hasAnyDamaged =
         tires.any((element) => element.status == TireStatus.damaged);
-    return hasAnyDamaged ? CarStatus.damaged : CarStatus.repaired;
+    return hasAnyDamaged || tires.length != 2
+        ? CarStatus.damaged
+        : CarStatus.repaired;
   }
 
   Vector2 _computeStartPosition() {
