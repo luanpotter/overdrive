@@ -1,15 +1,11 @@
 import 'package:dartlin/dartlin.dart';
 import 'package:flame/components.dart';
-<<<<<<< HEAD
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
+import 'package:overdrive_components/gen/assets.gen.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/player/behaviors/behaviors.dart';
-=======
-import 'package:flame_audio/flame_audio.dart';
-import 'package:flame_forge2d/flame_forge2d.dart' hide Pair;
-import 'package:overdrive_components/gen/assets.gen.dart';
->>>>>>> 7664ab6 (feat: adding screw driver sound to the game)
 import 'package:overdrive_components/src/utils.dart';
 
 class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
@@ -35,7 +31,7 @@ class TireRemoverBehavior extends Behavior<Player> with HasGameRef {
       final tire = closestTire.key;
       final car = tire.car;
       if (car != null) {
-        FlameAudio.play('packages/overdrive_components/${Assets.sfx.screwDriverMp3}');
+        FlameAudio.play('packages/overdrive_components/${Assets.sfx.screwDriver}');
         _tire = tire;
         _cooldown = 2.0;
       }
