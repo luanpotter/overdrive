@@ -21,7 +21,7 @@ void main() {
       routes: {
         '/': (context) => const TitleScreen(),
         '/stages': (context) => const StageSelection(),
-        '/character_selection': (context) => CharacterSelection(),
+        '/character_selection': (context) => const CharacterSelection(),
         '/game': (context) => GameWidget(game: OverdriveGame()),
         '/credits': (context) => const CreditsScreen(),
       },
