@@ -110,6 +110,11 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
   }
 
   @override
+  Color backgroundColor() {
+    return const Color(0xffc5bdca);
+  }
+
+  @override
   Future<void> onLoad() async {
     await super.onLoad();
 
@@ -155,7 +160,7 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
 
     // init screwdriver on toolTable;
     toolTable.holdingItem = ItemType.screwdriver;
-    
+
     spawnCar();
   }
 
