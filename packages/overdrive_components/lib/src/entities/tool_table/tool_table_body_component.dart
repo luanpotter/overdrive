@@ -8,8 +8,8 @@ import 'package:overdrive_components/src/utils.dart';
 import 'tool_table.dart';
 
 class ToolTableBodyComponent extends BodyComponent with ParentIsA<ToolTable> {
-  // original size:, 381 x 654,
-  static final size = Vector2(3.81, 6.54);
+  // original size:, 576 x 478,
+  static final size = Vector2(5.76, 4.78);
 
   late final Sprite sprite;
   final Vector2 startPosition;
