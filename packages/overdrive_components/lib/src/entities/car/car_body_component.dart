@@ -43,7 +43,7 @@ class CarBodyComponent extends BodyComponent with ParentIsA<Car> {
       spot: TireSpot.back,
     );
 
-    final shouldFrontBeDamaged = !shouldBackBeDamaged || random.nextBool();
+    final shouldFrontBeDamaged = !shouldBackBeDamaged;
     await addTire(
       status: shouldFrontBeDamaged ? TireStatus.damaged : TireStatus.normal,
       spot: TireSpot.front,
