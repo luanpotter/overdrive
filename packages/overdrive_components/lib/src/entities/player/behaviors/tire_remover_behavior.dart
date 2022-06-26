@@ -142,8 +142,12 @@ class TireScrewerBehavior extends Behavior<Player> with HasGameRef {
   }
 
   double _computeDistanceToTire(Tire tire) {
+    final sprite = tire.sprite;
+    if (sprite == null) {
+      return double.maxFinite;
+    }
     final tirePosition =
-        tire.sprite.position + (tire.car?.body.body.position ?? Vector2.zero());
+        sprite.position + (tire.car?.body.body.position ?? Vector2.zero());
     return player.position.distanceTo(tirePosition);
   }
 }

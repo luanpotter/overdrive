@@ -22,6 +22,7 @@ class ItemPickerBehavior extends Behavior<Player> with HasGameRef {
       );
 
       if (closestToolTable != null &&
+          closestToolTable.key.holdingItem == null &&
           closestToolTable.value <= interactDistance) {
         closestToolTable.key.holdingItem = currentHoldingItem;
       } else {

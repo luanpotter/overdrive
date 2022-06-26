@@ -71,7 +71,8 @@ class Tire extends ItemEntity {
 
   TireBodyComponent? get body => firstChild<TireBodyComponent>();
 
-  TireSprite get sprite => firstChild<TireSprite>()!;
+  // TODO(luan): should be non null!!
+  TireSprite? get sprite => firstChild<TireSprite>();
 
   static const tireRadius = 2.0;
   static final tireSize = Vector2.all(2 * tireRadius);
