@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/palette.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
+import 'package:overdrive_components/overdrive_components.dart';
 
 import 'garage_border_body.dart';
 
@@ -16,17 +17,20 @@ class Garage extends Entity with HasGameRef {
     await super.onLoad();
 
     final delta = Vector2.all(4);
+    final size = gameRef.size - (delta * 2);
     await add(
       GarageBorderBody(
         position: delta,
-        size: gameRef.size - (delta * 2),
+        size: size,
       ),
     );
+
+    add(GarageFloor(position: delta, size: size));
   }
 
   @override
-  void render(Canvas canvas) {
-    renderBackground(canvas);
+  void renderTree(Canvas canvas) {
+    super.renderTree(canvas);
     renderCarSpots(canvas);
   }
 
