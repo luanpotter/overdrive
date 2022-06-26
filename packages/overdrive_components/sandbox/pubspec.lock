@@ -99,6 +99,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1"
+  flame_forge2d:
+    dependency: transitive
+    description:
+      name: flame_forge2d
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.12.0"
   flame_lint:
     dependency: "direct dev"
     description:
@@ -135,6 +142,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  forge2d:
+    dependency: transitive
+    description:
+      name: forge2d
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.11.0"
   freezed_annotation:
     dependency: transitive
     description:
