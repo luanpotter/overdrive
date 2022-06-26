@@ -132,7 +132,7 @@ class OverdriveGame extends Forge2DGame with HasKeyboardHandlerComponents {
 
     await add(toolTable);
 
-    if (characterPlayer2 != CharacterType.empty) {
+    if (characterPlayer2 != null && characterPlayer2 != CharacterType.empty) {
       add(
         Player.arrows(
           position: size / 2 - Vector2(15, Player.playerSize.y / 2),
