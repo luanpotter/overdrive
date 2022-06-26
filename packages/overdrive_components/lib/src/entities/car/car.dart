@@ -14,27 +14,32 @@ enum CarStatus {
 class Car extends Entity with HasGameRef {
   Car._({
     required this.lane,
-    required this.status,
     super.behaviors,
+    this.startRepaired = false,
   }) : super(size: CarSprite.spriteSize);
 
   Car.damaged({required int lane, Iterable<Behavior>? behaviors})
       : this._(
           lane: lane,
-          status: CarStatus.damaged,
           behaviors: behaviors,
         );
 
   Car.repaired({required int lane, Iterable<Behavior>? behaviors})
       : this._(
           lane: lane,
-          status: CarStatus.repaired,
           behaviors: behaviors,
+          startRepaired: true,
         );
 
   final engineForce = Vector2(1, 0);
-  final CarStatus status;
+  final bool startRepaired;
   final int lane;
+
+  CarStatus get status {
+    final hasAnyDamaged =
+        tires.any((element) => element.status == TireStatus.damaged);
+    return hasAnyDamaged ? CarStatus.damaged : CarStatus.repaired;
+  }
 
   Vector2 _computeStartPosition() {
     return Vector2(

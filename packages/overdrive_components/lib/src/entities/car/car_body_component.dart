@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:overdrive_components/src/entities/entities.dart';
@@ -33,17 +35,19 @@ class CarBodyComponent extends BodyComponent with ParentIsA<Car> {
   Future<void> onLoad() async {
     await add(CarSpriteBackground());
 
-    switch (parent.status) {
-      case CarStatus.damaged:
-        await addTire(status: TireStatus.damaged, spot: TireSpot.back);
-        await addTire(status: TireStatus.normal, spot: TireSpot.front);
-        break;
+    final random = Random();
+    final shouldBackBeDamaged = random.nextBool();
 
-      case CarStatus.repaired:
-        await addTire(status: TireStatus.normal, spot: TireSpot.back);
-        await addTire(status: TireStatus.normal, spot: TireSpot.front);
-        break;
-    }
+    await addTire(
+      status: shouldBackBeDamaged ? TireStatus.damaged : TireStatus.normal,
+      spot: TireSpot.back,
+    );
+
+    final shouldFrontBeDamaged = !shouldBackBeDamaged || random.nextBool();
+    await addTire(
+      status: shouldFrontBeDamaged ? TireStatus.damaged : TireStatus.normal,
+      spot: TireSpot.front,
+    );
 
     await add(CarSprite.anyColor());
 
