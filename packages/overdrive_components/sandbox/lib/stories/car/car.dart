@@ -16,7 +16,9 @@ void addCarStories(Dashbook dashbook) {
         ],
       );
 
-      final behaviors = [DriveInBehavior()];
+      final behaviors = [
+        DriveInBehavior(),
+      ];
       final Car car;
 
       switch (status) {
@@ -27,30 +29,9 @@ void addCarStories(Dashbook dashbook) {
           car = Car.repaired(lane: 0, behaviors: behaviors);
       }
 
-      return GameWidget(game: StoryGame(center: false, car));
-    },
-  ).add(
-    'Drive Out',
-    (context) {
-      final status = context.optionsProperty<CarStatus>(
-        'status',
-        CarStatus.repaired,
-        [
-          PropertyOption('repaired', CarStatus.repaired),
-          PropertyOption('damaged', CarStatus.damaged),
-        ],
-      );
-
-      final behaviors = [DriveOutBehavior()];
-      final Car car;
-
-      switch (status) {
-        case CarStatus.damaged:
-          car = Car.damaged(lane: 0, behaviors: behaviors);
-          break;
-        case CarStatus.repaired:
-          car = Car.repaired(lane: 0, behaviors: behaviors);
-      }
+      context.action('Repair', (context) {
+        car.tires.forEach((element) => element.repair());
+      });
 
       return GameWidget(game: StoryGame(center: false, car));
     },
