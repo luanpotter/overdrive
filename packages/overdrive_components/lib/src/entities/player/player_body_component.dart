@@ -33,7 +33,9 @@ class PlayerBodyComponent extends BodyComponent with ParentIsA<Player> {
     await super.onLoad();
 
     sprite = await Sprite.load(characterTypes[character]!);
-    paint = Paint()..filterQuality = FilterQuality.medium..isAntiAlias = false;
+    paint = Paint()
+      ..filterQuality = FilterQuality.medium
+      ..isAntiAlias = false;
   }
 
   @override

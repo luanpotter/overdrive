@@ -99,8 +99,7 @@ class Assets {
 }
 
 class AssetGenImage extends AssetImage {
-  const AssetGenImage(String assetName)
-      : super(assetName, package: 'overdrive_components');
+  const AssetGenImage(super.assetName) : super(package: 'overdrive_components');
 
   Image image({
     Key? key,

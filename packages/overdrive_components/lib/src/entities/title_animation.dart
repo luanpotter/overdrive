@@ -11,7 +11,9 @@ class _RunningChar extends PositionComponent with ParentIsA<TitleAnimation> {
 
   @override
   Future<void> onLoad() async {
-    final paint = Paint()..filterQuality = FilterQuality.medium..isAntiAlias = false;
+    final paint = Paint()
+      ..filterQuality = FilterQuality.medium
+      ..isAntiAlias = false;
 
     final char = SpriteComponent(
       sprite: parent._charSprite,
@@ -88,7 +90,9 @@ class TitleAnimation extends PositionComponent with HasGameRef {
 
   @override
   Future<void> onLoad() async {
-    final paint = Paint()..filterQuality = FilterQuality.medium..isAntiAlias = false;
+    final paint = Paint()
+      ..filterQuality = FilterQuality.medium
+      ..isAntiAlias = false;
 
     _titleSprite = await gameRef.loadSprite(
       Assets.images.titleScreen.title.keyName,

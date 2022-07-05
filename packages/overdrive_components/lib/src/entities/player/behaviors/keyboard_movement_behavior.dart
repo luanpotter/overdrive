@@ -121,7 +121,9 @@ class KeyboardMovementBehavior extends Behavior<Player>
   }
 
   static double _computeTireFixerWorkbenchDistance(
-      Body player, TireFixerWorkbench item) {
+    Body player,
+    TireFixerWorkbench item,
+  ) {
     return item.body.body.position.distanceTo(player.position);
   }
 
