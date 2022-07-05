@@ -4,6 +4,7 @@ import 'package:overdrive_components/src/entities/entities.dart';
 import 'package:overdrive_components/src/entities/tire_fixer_workbench/tire_fixer_workbench_body_component.dart';
 
 export 'behaviors/behavrios.dart';
+
 class TireFixerWorkbench extends Entity {
   static final tireFixerWorkbenchSize = TireFixerWorkbenchBodyComponent.size;
   static final _fixingItemOffset = Vector2(4, 0);
