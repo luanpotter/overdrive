@@ -8,7 +8,6 @@ on:
     types: [opened, reopened, synchronize]
 
 jobs:
-  # BEGIN LINTING STAGE
   format:
     runs-on: ubuntu-latest
     steps:
@@ -30,17 +29,3 @@ jobs:
           cache: true
       - uses: bluefireteam/melos-action@main
       - run: melos run analyze
-  # END LINTING STAGE
-
-  # BEGIN TESTING STAGE
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          cache: true
-      - uses: bluefireteam/melos-action@main
-      - uses: bluefireteam/spec-action@main
-  # END TESTING STAGE
