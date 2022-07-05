@@ -2,7 +2,7 @@ name: Overdrive
 repository: https://github.com/luanpotter/overdrive
 
 packages:
-  - /
+  - /**
   - packages/**
 
 command:
