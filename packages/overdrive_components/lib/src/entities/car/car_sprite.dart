@@ -48,7 +48,9 @@ class CarSprite extends SpriteComponent {
     await super.onLoad();
     size = spriteSize;
     sprite = await Sprite.load(spriteAsset);
-    paint = Paint()..filterQuality = FilterQuality.medium..isAntiAlias = false;
+    paint = Paint()
+      ..filterQuality = FilterQuality.medium
+      ..isAntiAlias = false;
   }
 }
 

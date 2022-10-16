@@ -42,7 +42,10 @@ class TitleScreen extends StatelessWidget {
                     child: const Text('Play'),
                     onPressed: () {
                       if (!FlameAudio.bgm.isPlaying) {
-                        FlameAudio.bgm.play('packages/overdrive_components/${Assets.bgm}', volume: 0.4);
+                        FlameAudio.bgm.play(
+                          'packages/overdrive_components/${Assets.bgm}',
+                          volume: 0.4,
+                        );
                       }
                       Navigator.of(context).pushNamed('/stages');
                     },
